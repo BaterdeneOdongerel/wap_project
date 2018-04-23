@@ -11,35 +11,97 @@
 
     <title>$Title$</title>
     <jsp:include page="header.jsp" />
-    <link rel="stylesheet" type="text/css" href="/rsc/css/main.css">
+
   </head>
   <body>
 
   <jsp:include page="nav.jsp" />
 
+  <div class="back_container">
+    <div class="container text-center">
+        <jsp:include page="notifaction_box.jsp"/>
+        <div class="body_content text-left">
+          <h3>Upcoming Cycling Events</h3>
+          <div class="row">
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+          </div>
 
-  <div class="container-fluid text-center">
-    <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-      </div>
-      <div class="col-sm-8 text-left">
-        <h1>Welcome</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <hr>
-        <h3>Test</h3>
-        <p>Lorem ipsum...</p>
-      </div>
-      <div class="col-sm-2 sidenav">
-        <div class="well">
-          <p>ADS</p>
+          <div class="row">
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+          </div>
+
+
         </div>
-        <div class="well">
-          <p>ADS</p>
-        </div>
-      </div>
     </div>
   </div>
 

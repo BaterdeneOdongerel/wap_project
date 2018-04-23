@@ -3,8 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>temp.jsp</welcome-file>
+        <welcome-file>create_event.jsp</welcome-file>
+        <welcome-file>edit_event.jsp</welcome-file>
+        <welcome-file>live_events.jsp</welcome-file>
+        <welcome-file>signup.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>user_list.jsp</welcome-file>
     </welcome-file-list>
+
+
+
+
 </web-app>
