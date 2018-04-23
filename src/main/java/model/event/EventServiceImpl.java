@@ -1,18 +1,15 @@
-package model.user;
+package model.event;
 
 import db.ConnectionConfiguration;
-import props.MessagesProp;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserManImpl implements UserMan {
-
-    private User currentUser;
+public class EventServiceImpl implements EventService {
 
     @Override
-    public void insert(User user) {
+    public void insert(Event user) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -20,10 +17,6 @@ public class UserManImpl implements UserMan {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection.prepareStatement("INSERT INTO user (first_name, last_name, email, password, type, "
                     + "status, created, insurance_company)" + "VALUES (?, ?, ?, ?, ?, ?, sysdate(), ?)");
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -48,24 +41,20 @@ public class UserManImpl implements UserMan {
     }
 
     @Override
-    public User selectById(int id) {
-        User user = new User();
+    public Event selectById(int id) {
+        Event user = new Event();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE user_id = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM event WHERE user_id = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                user.setUserId(resultSet.getInt("user_id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
+                //user.setUserId(resultSet.getInt("user_id"));
             }
 
         } catch (Exception e) {
@@ -98,8 +87,8 @@ public class UserManImpl implements UserMan {
     }
 
     @Override
-    public List<User> selectAll() {
-        List<User> users = new ArrayList<User>();
+    public List<Event> selectAll() {
+        List<Event> users = new ArrayList<Event>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -110,13 +99,9 @@ public class UserManImpl implements UserMan {
             resultSet = statement.executeQuery("SELECT * FROM user");
 
             while (resultSet.next()) {
-                User user = new User();
-                user.setUserId(resultSet.getInt("user_id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setFirstName(resultSet.getString("last_name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-                users.add(user);
+                Event event = new Event();
+               // event.setPassword(resultSet.getString("password"));
+               // users.add(user);
             }
 
         } catch (Exception e) {
@@ -182,18 +167,15 @@ public class UserManImpl implements UserMan {
     }
 
     @Override
-    public void update(User user, int id) {
+    public void update(Event user, int id) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection
-                    .prepareStatement("UPDATE user SET " + "first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
+                    .prepareStatement("UPDATE event SET " + "first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
 
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getEmail());
             preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
 
@@ -217,61 +199,6 @@ public class UserManImpl implements UserMan {
         }
     }
 
-    @Override
-    public boolean login(String email, String password) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        boolean ret = false;
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE email = ?");
-            preparedStatement.setString(1, email);
-            resultSet = preparedStatement.executeQuery();
-            User user = new User();
-            user.setUserId(-1);
-            while (resultSet.next()) {
-                user.setUserId(resultSet.getInt("id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-                ret = true;
-                currentUser = user;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return ret;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
     public static void main(String[] args) {
-        UserManImpl userModel = new UserManImpl();
-        boolean success = userModel.login("vanthuyphan@gmail.com", "123456");
-        if (success) {
-            System.out.println("Bing go");
-            System.out.println(userModel.getCurrentUser().getLastName());
-        } else {
-            System.out.println(MessagesProp.INSTANCE.getProp("errorLogin"));
-        }
     }
 }
