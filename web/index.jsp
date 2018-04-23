@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
   <head>
 
@@ -22,44 +24,12 @@
         <jsp:include page="notifaction_box.jsp"/>
         <div class="body_content text-left">
           <h3>Upcoming Cycling Events</h3>
-          <div class="row">
-            <div class="column" >
-              <h5>Cycling title
-                <span class="label label-warning">Not joined</span>
-              </h5>
-              <p> date time </p>
-              <p> Begin location </p>
-              <span class="label label-info">Upcoming</span>
-              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
-            </div>
-            <div class="column" >
-              <h5>Cycling title
-                <span class="label label-success">Joined</span>
-              </h5>
-              <p> date time </p>
-              <p> Begin location </p>
-              <span class="label label-info">Upcoming</span>
-              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
-            </div>
-            <div class="column" >
-              <h5>Cycling title
-                <span class="label label-warning">Not joined</span>
-              </h5>
-              <p> date time </p>
-              <p> Begin location </p>
-              <span class="label label-info">Upcoming</span>
-              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
-            </div>
-            <div class="column" >
-              <h5>Cycling title
-                <span class="label label-success">Joined</span>
-              </h5>
-              <p> date time </p>
-              <p> Begin location </p>
-              <span class="label label-info">Upcoming</span>
-              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
-            </div>
-          </div>
+          <c:forEach var="element" items="${events}" >
+            <tr>
+              <br>try : ${element.title}
+            </tr>
+          </c:forEach>
+
 
           <div class="row">
             <div class="column" >
@@ -100,6 +70,44 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-warning">Not joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+            <div class="column" >
+              <h5>Cycling title
+                <span class="label label-success">Joined</span>
+              </h5>
+              <p> date time </p>
+              <p> Begin location </p>
+              <span class="label label-info">Upcoming</span>
+              <a href="#"><button type="button" class="btn btn-success btn-sm">Enter</button></a>
+            </div>
+          </div>
 
         </div>
     </div>

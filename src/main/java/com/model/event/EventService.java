@@ -1,5 +1,7 @@
 package com.model.event;
 
+import com.model.user.User;
+
 import java.util.List;
 
 public interface EventService {
@@ -12,6 +14,9 @@ public interface EventService {
 
     void delete(int id);
 
+
     void update(Event event);
-    
+
+    List<Event> selectByStatus(String status);
+
 }

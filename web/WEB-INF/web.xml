@@ -22,8 +22,10 @@
         <servlet-name>CreateEventServlet</servlet-name>
         <url-pattern>/create_event</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/public/*</url-pattern>
     </servlet-mapping>
+
 </web-app>

@@ -21,13 +21,13 @@
         <div class="body_content text-left col-sm-7">
             <h3>Login</h3>
 
-            <form class="form-horizontal" action="/action_page.php">
+            <form class="form-horizontal" action="/login" method="post">
 
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="username">Username:</label>
+                    <label class="control-label col-sm-2" for="email">Email:</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
                     </div>
                 </div>
 

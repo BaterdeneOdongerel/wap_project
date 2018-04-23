@@ -2,8 +2,10 @@ package com.model.userevent;
 
 import com.db.ConnectionConfiguration;
 import com.model.event.Event;
+import com.model.user.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,8 @@ public class UserEventImpl implements UserEventService {
             }
         }
     }
+
+
 
     @Override
     public Event selectById(int id) {
@@ -199,7 +203,102 @@ public class UserEventImpl implements UserEventService {
             }
         }
     }
+    @Override
+    public UserEvent selectByUserIdEventid(User user , Event event) {
+        UserEvent res = null;
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
 
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            statement = connection.createStatement();
+            String qry = "SELECT * FROM userevent WHERE user_id = '" + user.getUserId() +
+                    "' and event_id = '" + event.getId() +"'" ;
+            System.out.println("==" + qry +"==");
+            resultSet = statement.executeQuery(qry);
+
+            while (resultSet.next()) {
+                res = new UserEvent();
+                res.setId(resultSet.getInt("id"));
+                res.setOwner(resultSet.getBoolean("owner"));
+                res.setUserId(resultSet.getInt("user_id"));
+                res.setEventId(resultSet.getInt("event_id"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return res;
+    }
+
+    public List<Event> selectByUser(User user) {
+        List<Event> users = new ArrayList<Event>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM  WHERE = '" + user.getUserId()+ "'");
+
+            while (resultSet.next()) {
+                Event event = new Event();
+                // event.setPassword(resultSet.getString("password"));
+                // users.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return users;
+    }
     public static void main(String[] args) {
     }
 }

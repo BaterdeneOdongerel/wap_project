@@ -1,11 +1,18 @@
 package com.model.event;
 
 import com.db.ConnectionConfiguration;
+
 import com.utils.Utils;
 
+import com.model.user.User;
+
+
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class EventServiceImpl implements EventService {
 
@@ -64,7 +71,7 @@ public class EventServiceImpl implements EventService {
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM event WHERE user_id = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM event WHERE id = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
 
@@ -111,10 +118,11 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM user");
+            resultSet = statement.executeQuery("SELECT * FROM event");
 
             while (resultSet.next()) {
                 Event event = new Event();
+
                // event.setPassword(resultSet.getString("password"));
                // users.add(user);
             }
@@ -155,11 +163,11 @@ public class EventServiceImpl implements EventService {
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("DELETE FROM user WHERE user_id = ?");
+            preparedStatement = connection.prepareStatement("DELETE FROM event WHERE id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            System.out.println("DELETE FROM user WHERE user_id = ?");
+            System.out.println("DELETE FROM event WHERE id = ?");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -214,4 +222,67 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+
+    @Override
+    public List<Event> selectByStatus(String status) {
+        List<Event> users = new ArrayList<Event>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            statement = connection.createStatement();
+            String qry = "SELECT * FROM event WHERE status = '" + status + "'" ;
+            System.out.println("========>" + qry);
+            resultSet = statement.executeQuery(qry);
+
+            while (resultSet.next()) {
+                Event event = new Event();
+                event.setId( resultSet.getInt("id") );
+                event.setTitle( resultSet.getString("title") );
+                event.setStartDate(LocalDate.parse(resultSet.getString("start_date").substring(0,10) ) );
+                event.setEndDate( LocalDate.parse(resultSet.getString("end_date").substring(0,10) ) );
+                event.setBeginLocation( resultSet.getString("begin_location") );
+                event.setEndLocation( resultSet.getString("end_location") );
+                event.setDistance( resultSet.getFloat("distance") );
+                event.setComment( resultSet.getString("comment") );
+                event.setStatus( resultSet.getString("status") );
+                event.setAccidentLocation( resultSet.getString("accident_location") );
+                event.setHasAccident( resultSet.getBoolean("hasAccident") );
+                users.add(event);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return users;
+    }
+
+
+
+    public static void main(String[] args) {
+    }
 }

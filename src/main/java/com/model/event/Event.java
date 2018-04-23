@@ -1,6 +1,10 @@
 package com.model.event;
 
+import com.model.user.User;
+import com.model.userevent.UserEvent;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class Event {
     private int id ;

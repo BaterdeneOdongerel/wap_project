@@ -30,3 +30,12 @@ CREATE TABLE IF NOT EXISTS `Event` (
 
 insert into Event(`title`, `start_date`, `end_date`, `begin_location`, `end_location`, `distance`, `comment`, `status`, `accident_location`, `accident_description`, `hasAccident`)
 values ('Test Event', '2018-04-25', '2018-04-27', 'London', 'Paris', 120, 'Windy Road', 'On Going', '', '', 0);
+
+CREATE TABLE IF NOT EXISTS `UserEvent` (
+	`id` BIGINT NOT NULL AUTO_INCREMENT,
+	`user_id` BIGINT,
+	`event_id` BIGINT,
+	`owner` SMALLINT DEFAULT 0,
+	PRIMARY KEY (`id`)
+) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT INTO `userevent` (`user_id`, `event_id`, `owner`) VALUES ('1', '1', '0');
