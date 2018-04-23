@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS `User` (
 	`password` VARCHAR(20),
 	PRIMARY KEY (`code`)
 ) ENGINE MyISAM DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+insert into User(`email`, `user_name`, `first_name`, `last_name`, `password`) values ('vanthuyphan@gmail.com', 'vanthuyphan', 'van', 'phan', '123456');
+insert into User(`email`, `user_name`, `first_name`, `last_name`, `password`) values ('bati@gmail.com', 'bati', 'bati', 'bati', '123456');
