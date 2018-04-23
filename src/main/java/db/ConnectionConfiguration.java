@@ -1,6 +1,8 @@
 package db;
 
+import model.user.UserManImpl;
 import props.DatabaseProp;
+import props.MessagesProp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,5 +31,6 @@ public class ConnectionConfiguration {
 
     public static void main(String[] args) {
         System.out.println(ConnectionConfiguration.getConnection());
+
     }
 }

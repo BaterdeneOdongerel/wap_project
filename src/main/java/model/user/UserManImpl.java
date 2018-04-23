@@ -1,6 +1,7 @@
 package model.user;
 
 import db.ConnectionConfiguration;
+import props.MessagesProp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -230,11 +231,13 @@ public class UserManImpl implements UserMan {
             User user = new User();
             user.setUserId(-1);
             while (resultSet.next()) {
-                user.setUserId(resultSet.getInt("user_id"));
+                user.setUserId(resultSet.getInt("id"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
+                ret = true;
+                currentUser = user;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,5 +262,16 @@ public class UserManImpl implements UserMan {
 
     public User getCurrentUser() {
         return currentUser;
+    }
+
+    public static void main(String[] args) {
+        UserManImpl userModel = new UserManImpl();
+        boolean success = userModel.login("vanthuyphan@gmail.com", "123456");
+        if (success) {
+            System.out.println("Bing go");
+            System.out.println(userModel.getCurrentUser().getLastName());
+        } else {
+            System.out.println(MessagesProp.INSTANCE.getProp("errorLogin"));
+        }
     }
 }
