@@ -9,12 +9,12 @@ public class Event {
     private LocalDate endDate;
     private String beginLocation;
     private String endLocation;
-    private String length;
+    private Double distance;
     private String comment;
     private String status;
     private Boolean hasAccident;
     private String accidentLocation;
-    private String descAccident;
+    private String accidentDescription;
 
     public int getId() {
         return id;
@@ -64,12 +64,12 @@ public class Event {
         this.endLocation = endLocation;
     }
 
-    public String getLength() {
-        return length;
+    public Double getDistance() {
+        return distance;
     }
 
-    public void setLength(String length) {
-        this.length = length;
+    public void setDistance(Double distance) {
+        this.distance = distance;
     }
 
     public String getComment() {
@@ -104,11 +104,11 @@ public class Event {
         this.accidentLocation = accidentLocation;
     }
 
-    public String getDescAccident() {
-        return descAccident;
+    public String getAccidentDescription() {
+        return accidentDescription;
     }
 
-    public void setDescAccident(String descAccident) {
-        this.descAccident = descAccident;
+    public void setAccidentDescription(String accidentDescription) {
+        this.accidentDescription = accidentDescription;
     }
 }

@@ -15,7 +15,7 @@ public class EventServiceImpl implements EventService {
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO user (first_name, last_name, email, password, type, "
+            preparedStatement = connection.prepareStatement("INSERT INTO event (first_name, last_name, email, password, type, "
                     + "status, created, insurance_company)" + "VALUES (?, ?, ?, ?, ?, ?, sysdate(), ?)");
             preparedStatement.executeUpdate();
 
