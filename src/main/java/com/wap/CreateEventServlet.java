@@ -21,11 +21,11 @@ public class CreateEventServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Event event = new Event();
         String title = extractValue(request, "title", "");
-        LocalDate startDate = extractValue(request, "start_date", LocalDate.now());
-        LocalDate endDate = extractValue(request, "end_date", LocalDate.now());
+        LocalDate startDate = extractDate(request, "start_date", LocalDate.now());
+        LocalDate endDate = extractDate(request, "end_date", LocalDate.now());
         String beginLocation = extractValue(request, "begin_location", "");
         String endLocation = extractValue(request, "end_location", "");
-        Float distance = extractValue(request, "distance", Float.valueOf(0));
+        Float distance = extractNumber(request, "distance", Float.valueOf(0));
         String comment = extractValue(request, "comment", "");
         String status = extractValue(request, "status", "");
 

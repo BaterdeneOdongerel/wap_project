@@ -31,22 +31,22 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="date">Start Date:</label>
+                    <label class="control-label col-sm-2" for="start_date">Start Date:</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="date" name="date">
+                        <input type="date" class="form-control" id="start_date" name="start_date">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="time">Start Time:</label>
+                    <label class="control-label col-sm-2" for="start_time">Start Time:</label>
                     <div class="col-sm-3">
-                        <input type="time" class="form-control" id="time" name="time">
+                        <input type="time" class="form-control" id="start_time" name="start_time">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="start_location">Start Location:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="start_location" placeholder="Enter starting location">
+                        <input type="text" class="form-control" name="start_location" id="start_location" placeholder="Enter starting location">
                     </div>
                 </div>
 
@@ -58,9 +58,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="length_path">Length of the path:</label>
+                    <label class="control-label col-sm-2" for="distance">Length of the path:</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name= "length_path" id="length_path" placeholder="Enter length of the path">
+                        <input type="text" class="form-control" name= "distance" id="distance" placeholder="Enter length of the path">
                     </div>
                 </div>
 

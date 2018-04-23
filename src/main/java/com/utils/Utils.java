@@ -17,4 +17,16 @@ public class Utils {
         boolean hasValue = param != null && !param.isEmpty();
         return hasValue ? (T) param : defaultValue;
     }
+
+    public static LocalDate extractDate(HttpServletRequest request, String name, LocalDate defaultValue) {
+        String param = request.getParameter(name);
+        boolean hasValue = param != null && !param.isEmpty();
+        return hasValue ? LocalDate.parse(param) : defaultValue;
+    }
+
+    public static Float extractNumber(HttpServletRequest request, String name, Float defaultValue) {
+        String param = request.getParameter(name);
+        boolean hasValue = param != null && !param.isEmpty();
+        return hasValue ? Float.parseFloat(param) : defaultValue;
+    }
 }
