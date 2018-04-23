@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/" style="">
-                <img src="/rsc/images/logo.png" width="30px" height="30px"/>
+                <img src="./public/images/logo.png" width="30px" height="30px"/>
             </a>
         </div>
 
