@@ -20,6 +20,8 @@ public class Event {
     private String accidentLocation;
     private String accidentDescription;
 
+    
+
     public int getId() {
         return id;
     }

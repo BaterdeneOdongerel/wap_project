@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@WebServlet("")
 public class HomeServlet extends BaseServlet {
 
 
@@ -31,18 +31,16 @@ public class HomeServlet extends BaseServlet {
 
         User user = (User)request.getSession().getAttribute("user");
         List<Event> events = eventService.selectByStatus("Upcoming");
+
         List<UserEvent> userEvents = new ArrayList<>();
         for (Event e: events) {
             UserEvent r = userEventIml.selectByUserIdEventid(user , e);
             userEvents.add(r);
-            System.out.println( (r != null ? r.getEventId() : "-1") );
         }
 
-        System.out.println("===>" + events.size());
-        for (Event e : events) {
-            System.out.println("=======>"  + e.getTitle());
-        }
+
         request.setAttribute("events" , events);
+        request.setAttribute("userevent",userEvents);
 
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
         view.forward(request, response);
