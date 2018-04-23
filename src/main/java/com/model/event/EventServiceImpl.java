@@ -4,7 +4,6 @@ import com.db.ConnectionConfiguration;
 import com.utils.Utils;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,7 +182,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void update(Event user, int id) {
+    public void update(Event event) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -192,7 +191,7 @@ public class EventServiceImpl implements EventService {
             preparedStatement = connection
                     .prepareStatement("UPDATE event SET " + "first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
 
-            preparedStatement.setInt(4, id);
+            preparedStatement.setInt(4, event.getId());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {

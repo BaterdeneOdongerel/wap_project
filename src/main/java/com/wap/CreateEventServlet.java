@@ -16,9 +16,9 @@ import java.time.LocalDate;
 import static com.utils.Utils.*;
 
 @WebServlet("/create")
-public class CreateEventServlet extends HttpServlet {
+public class CreateEventServlet extends BaseServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Event event = new Event();
         String title = extractValue(request, "title", "");
         LocalDate startDate = extractDate(request, "start_date", LocalDate.now());
@@ -45,7 +45,7 @@ public class CreateEventServlet extends HttpServlet {
 
 
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("create_event.jsp");
         view.forward(request, response);
     }

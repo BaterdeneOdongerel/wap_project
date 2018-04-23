@@ -10,11 +10,11 @@ import java.io.IOException;
 
 @WebServlet("/live")
 
-public class LiveServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class LiveServlet extends BaseServlet {
+    protected void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("live_events.jsp");
         view.forward(request, response);
     }
