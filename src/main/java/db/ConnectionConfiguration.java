@@ -1,5 +1,7 @@
 package db;
 
+import props.DatabaseProp;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -8,14 +10,14 @@ public class ConnectionConfiguration {
 
     public static Connection getConnection() {
         Connection connection = null;
+        DatabaseProp prop = DatabaseProp.INSTANCE;
 
         try {
-            Properties prop = new Properties();
-            prop.load(ConnectionConfiguration.class.getClassLoader().getResourceAsStream("database.properties"));
-            String baseUrl = prop.getProperty("MySQL.path");
-            String user = prop.getProperty("MySQL.user");
-            String password = prop.getProperty("MySQL.pass");
-            String databaseName = prop.getProperty("MySQL.database");
+
+            String baseUrl = prop.getProp("MySQL.path");
+            String user = prop.getProp("MySQL.user");
+            String password = prop.getProp("MySQL.pass");
+            String databaseName = prop.getProp("MySQL.database");
             String URL = String.format("%s/%s?user=%s&password=%s&useSSL=false", baseUrl, databaseName, user, password);
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(URL);
