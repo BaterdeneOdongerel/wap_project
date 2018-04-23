@@ -1,6 +1,6 @@
-package db;
+package com.db;
 
-import props.DatabaseProp;
+import com.props.DatabaseProp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

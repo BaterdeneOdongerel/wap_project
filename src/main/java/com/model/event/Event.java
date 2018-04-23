@@ -1,14 +1,20 @@
-package com.model;
+package com.model.event;
+
+import java.time.LocalDate;
 
 public class Event {
     private int id ;
     private String title;
-    private String startdate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String beginLocation;
     private String endLocation;
     private String length;
     private String comment;
     private String status;
+    private Boolean hasAccident;
+    private String accidentLocation;
+    private String descAccident;
 
     public int getId() {
         return id;
@@ -26,12 +32,20 @@ public class Event {
         this.title = title;
     }
 
-    public String getStartdate() {
-        return startdate;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getBeginLocation() {
@@ -74,12 +88,12 @@ public class Event {
         this.status = status;
     }
 
-    public String getFlag() {
-        return flag;
+    public Boolean getHasAccident() {
+        return hasAccident;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setHasAccident(Boolean hasAccident) {
+        this.hasAccident = hasAccident;
     }
 
     public String getAccidentLocation() {
@@ -97,8 +111,4 @@ public class Event {
     public void setDescAccident(String descAccident) {
         this.descAccident = descAccident;
     }
-
-    private String flag;
-    private String accidentLocation;
-    private String descAccident;
 }

@@ -1,6 +1,6 @@
-package props;
+package com.props;
 
-import db.ConnectionConfiguration;
+import com.db.ConnectionConfiguration;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -8,14 +8,14 @@ import java.util.Properties;
 /**
  * Created by Van on 4/23/18.
  */
-public enum MessagesProp {
+public enum DatabaseProp {
 
     INSTANCE;
     private Properties prop;
-    private MessagesProp() {
+    private DatabaseProp() {
         prop = new Properties();
         try {
-            prop.load(ConnectionConfiguration.class.getClassLoader().getResourceAsStream("messages.properties"));
+            prop.load(ConnectionConfiguration.class.getClassLoader().getResourceAsStream("database.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
