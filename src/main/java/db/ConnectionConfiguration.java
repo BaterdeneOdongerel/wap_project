@@ -1,8 +1,6 @@
 package db;
 
-import model.user.UserManImpl;
 import props.DatabaseProp;
-import props.MessagesProp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
