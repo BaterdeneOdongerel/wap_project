@@ -22,7 +22,7 @@
         <div class="body_content text-left">
             <h3>Create an event</h3>
 
-            <form class="form-horizontal" action="/action_page.php">
+            <form class="form-horizontal" action="/create_event" method="POST">
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title">Title:</label>
                     <div class="col-sm-7">

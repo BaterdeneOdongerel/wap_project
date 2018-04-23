@@ -13,4 +13,4 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/rsc/css/main.css">
+<link rel="stylesheet" type="text/css" href="./public/css/main.css">
