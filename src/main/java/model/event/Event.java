@@ -3,27 +3,33 @@ package model.event;
 import java.time.LocalDate;
 
 public class Event {
-
-    private int event;
+    private int id ;
+    private String title;
     private LocalDate startDate;
-    private LocalDate arrivedDate;
-    private String startLocation;
-    private String arrivedLocation;
-    private int length;
-    private int status;
+    private LocalDate endDate;
+    private String beginLocation;
+    private String endLocation;
+    private String length;
     private String comment;
-    private boolean hasAccident;
+    private String status;
+    private Boolean hasAccident;
     private String accidentLocation;
+    private String descAccident;
 
-    public Event() {
+    public int getId() {
+        return id;
     }
 
-    public int getEvent() {
-        return event;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEvent(int event) {
-        this.event = event;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDate getStartDate() {
@@ -34,44 +40,36 @@ public class Event {
         this.startDate = startDate;
     }
 
-    public LocalDate getArrivedDate() {
-        return arrivedDate;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setArrivedDate(LocalDate arrivedDate) {
-        this.arrivedDate = arrivedDate;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    public String getStartLocation() {
-        return startLocation;
+    public String getBeginLocation() {
+        return beginLocation;
     }
 
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
+    public void setBeginLocation(String beginLocation) {
+        this.beginLocation = beginLocation;
     }
 
-    public String getArrivedLocation() {
-        return arrivedLocation;
+    public String getEndLocation() {
+        return endLocation;
     }
 
-    public void setArrivedLocation(String arrivedLocation) {
-        this.arrivedLocation = arrivedLocation;
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
     }
 
-    public int getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(String length) {
         this.length = length;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getComment() {
@@ -82,11 +80,19 @@ public class Event {
         this.comment = comment;
     }
 
-    public boolean isHasAccident() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Boolean getHasAccident() {
         return hasAccident;
     }
 
-    public void setHasAccident(boolean hasAccident) {
+    public void setHasAccident(Boolean hasAccident) {
         this.hasAccident = hasAccident;
     }
 
@@ -96,5 +102,13 @@ public class Event {
 
     public void setAccidentLocation(String accidentLocation) {
         this.accidentLocation = accidentLocation;
+    }
+
+    public String getDescAccident() {
+        return descAccident;
+    }
+
+    public void setDescAccident(String descAccident) {
+        this.descAccident = descAccident;
     }
 }
