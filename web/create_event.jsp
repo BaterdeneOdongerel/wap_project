@@ -9,7 +9,7 @@
 <html>
 <head>
 
-    <title>$Title$</title>
+    <title>Cycla - Create Event</title>
     <jsp:include page="header.jsp" />
 
 </head>

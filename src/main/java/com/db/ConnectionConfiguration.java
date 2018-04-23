@@ -23,7 +23,6 @@ public class ConnectionConfiguration {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return connection;
     }
 

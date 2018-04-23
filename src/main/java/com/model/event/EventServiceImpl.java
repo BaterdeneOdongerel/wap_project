@@ -1,22 +1,38 @@
 package com.model.event;
 
 import com.db.ConnectionConfiguration;
+import com.utils.Utils;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
 
     @Override
-    public void insert(Event user) {
+    public void insert(Event event) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO event (first_name, last_name, email, password, type, "
-                    + "status, created, insurance_company)" + "VALUES (?, ?, ?, ?, ?, ?, sysdate(), ?)");
+
+            preparedStatement = connection.prepareStatement(
+                    "INSERT into Event(title, start_date, end_date, begin_location, " +
+                            "end_location, distance, comment, status, accident_location, accident_description, hasAccident) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, event.getTitle());
+            preparedStatement.setTimestamp(2, Utils.convertTime(event.getStartDate()));
+            preparedStatement.setTimestamp(3, Utils.convertTime(event.getEndDate()));
+            preparedStatement.setString(4, event.getBeginLocation());
+            preparedStatement.setString(5, event.getEndLocation());
+            preparedStatement.setFloat(6, event.getDistance().floatValue());
+            preparedStatement.setString(7, event.getComment());
+            preparedStatement.setString(8, event.getStatus());
+            preparedStatement.setString(9, event.getAccidentLocation());
+            preparedStatement.setString(10, event.getAccidentDescription());
+            preparedStatement.setBoolean(11, false);
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -199,6 +215,4 @@ public class EventServiceImpl implements EventService {
         }
     }
 
-    public static void main(String[] args) {
-    }
 }
