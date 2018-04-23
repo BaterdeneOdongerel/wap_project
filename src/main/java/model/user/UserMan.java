@@ -2,8 +2,6 @@ package model.user;
 
 import java.util.List;
 
-import model.user.User;
-
 public interface UserMan {
 
     void insert(User user);

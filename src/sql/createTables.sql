@@ -1,5 +1,5 @@
-create whatever;
-use whatever;
+create event_management;
+use event_management;
 CREATE TABLE IF NOT EXISTS `User` (
 	`code` BIGINT NOT NULL AUTO_INCREMENT = 1000,
 	`id` VARCHAR(100) UNIQUE,
