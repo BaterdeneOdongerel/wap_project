@@ -30,7 +30,7 @@ public class HomeServlet extends BaseServlet {
         UserEventImpl userEventIml = new UserEventImpl();
 
         User user = (User)request.getSession().getAttribute("user");
-        List<Event> events = eventService.selectByStatus(EventStatus.UPCOMING);
+        List<Event> events = eventService.selectByStatus("Upcoming");
 
         List<UserEvent> userEvents = new ArrayList<>();
         for (Event e: events) {
