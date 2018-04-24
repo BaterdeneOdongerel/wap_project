@@ -242,12 +242,11 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection
-                    .prepareStatement("UPDATE event SET has_accident=?, accident_location=?, accident_description=? WHERE id=?");
+                    .prepareStatement("UPDATE event SET hasAccident=1, accident_location=?, accident_description=? WHERE id=?");
 
-            preparedStatement.setBoolean(1, event.getHasAccident());
-            preparedStatement.setString(2, event.getAccidentLocation());
-            preparedStatement.setString(3, event.getAccidentDescription());
-            preparedStatement.setInt(4, event.getId());
+            preparedStatement.setString(1, event.getAccidentLocation());
+            preparedStatement.setString(2, event.getAccidentDescription());
+            preparedStatement.setInt(3, event.getId());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {

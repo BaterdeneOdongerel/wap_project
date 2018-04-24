@@ -30,11 +30,9 @@ function registerEvents() {
     })
 
     $("#raise_event").click(function () {
-        const id = $("#id").val();
-        alert(id);
         const location = $("#accident_location").val();
         const description = $("#accident_location").text();
-        raiseEvent(id, location, description);
+        raiseEvent($("#id").val(), location, description);
     })
 
 }
@@ -66,7 +64,7 @@ function raiseEvent(id, location, description) {
     $.ajax("/raise_event"
         , {
             "type": "POST",
-            "date": data,
+            "data": data,
         }).done(function (data) {
             window.location.reload;
         }
