@@ -19,7 +19,6 @@
 
 <div class="back_container">
     <div class="container text-center">
-        <jsp:include page="notifaction_box.jsp"/>
         <div class="body_content text-left">
             <h3>Live Cycling Event</h3>
             <div class="row">

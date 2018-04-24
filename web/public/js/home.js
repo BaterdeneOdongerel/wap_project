@@ -1,4 +1,10 @@
 function initial() {
+    $("button[event='edit']").on("click", function() {
+        alert("Clickin");
+        const eventid = $(this).attr("data-event");
+        const userid = $(this).attr("data-user");
+        window.location.href = "/edit_event?event_id=" + eventid + "&user_id=" + userid;
+    });
 
     $("button[event='join']").on("click", function(){
        ajaxJoinEvent( this , $(this).attr("data-event")  , $(this).attr("data-user") );
@@ -16,20 +22,6 @@ function initial() {
             return false;
         }
     });
-
-    $("#edit_event").click(function () {
-        const eventid = $(this).attr("data-event");
-        const userid = $(this).attr("data-user");
-        $.ajax("/edit_event"
-            , { "type": "GET",
-                "data": { "eventid": eventid,
-                    "userid": userid },
-            }) .done( function(data){
-            }
-        ).fail(function(){
-        });
-    })
-
 }
 
 function checkValidation() {

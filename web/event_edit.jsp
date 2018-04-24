@@ -9,7 +9,7 @@
 <html>
 <head>
 
-    <title>Cycla - Create Event</title>
+    <title>Cycla - Update Event</title>
     <jsp:include page="header.jsp" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -25,25 +25,26 @@
 <div class="back_container">
     <div class="container text-center">
         <div class="body_content text-left">
-            <h3>Create an event</h3>
+            <h3>Update ${value.title}</h3>
             <div id="error-box" class="alert alert-danger alert-dismissible fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong id="notification"></strong>
             </div>
 
-            <form class="form-horizontal" id="create_form" action="/create_event" method="POST">
+            <form class="form-horizontal" id="create_form">
+                <input class="hidden" id="id" name="id" value="${event.id}">
                 <div id="errorMessage" class="error"></div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title">Title</label>
                     <div class="col-sm-7">
-                        <input required type="text" class="form-control" id="title" placeholder="Enter the trip title">
+                        <input required type="text" name="title" class="form-control" id="title" placeholder="Enter the trip title" value="${event.title}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="start_date">Start Date</label>
                     <div class="col-sm-3">
-                        <input required type="text" id="start_date" class="form-control" id="start_date" name="start_date">
+                        <input required type="text" id="start_date" class="form-control" id="start_date" name="start_date" value="${event.startDate}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -54,23 +55,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="start_location">Start Location</label>
+                    <label class="control-label col-sm-2" for="begin_location">Start Location</label>
                     <div class="col-sm-7">
-                        <input required type="text" id="start_location" class="form-control" name="start_location" id="start_location" placeholder="Enter starting location">
+                        <input required type="text" id="begin_location" class="form-control" name="begin_location" placeholder="Enter starting location" value="${event.beginLocation}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="end_location">End Location</label>
                     <div class="col-sm-7">
-                        <input required type="text" id="end_location" class="form-control" name= "end_location" id="end_location" placeholder="Enter ending location">
+                        <input required type="text" id="end_location" class="form-control" name= "end_location" id="end_location" placeholder="Enter ending location" value="${event.endLocation}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="distance">Distance</label>
                     <div class="col-sm-3">
-                        <input required type="number"  id="distance" class="form-control" name= "distance" id="distance" placeholder="Enter length of the path">
+                        <input required type="number" id="distance" class="form-control" name= "distance" id="distance" placeholder="Enter length of the path" value="${event.distance}">
                     </div>
                 </div>
 
@@ -78,7 +79,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="comment">Comment</label>
                     <div class="col-sm-7">
-                        <textarea  rows="3" class="form-control" name= "comment" id="comment" placeholder="Enter ending location"></textarea>
+                        <textarea  rows="3" class="form-control" name= "comment" id="comment" placeholder="Enter ending location">${event.comment}"</textarea>
                     </div>
                 </div>
 
@@ -86,11 +87,50 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
+                        <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
                     </div>
                 </div>
 
             </form>
 
+        </div>
+        <div class="modal fade" id="raise_modal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Raise Event</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="accident_form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="accident_location">Location</label>
+                                <div class="col-sm-7">
+                                    <input required type="text" name="accident_location" class="form-control" id="accident_location" placeholder="Enter the accident location">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="comment">Description</label>
+                                <div class="col-sm-7">
+                                    <textarea  rows="3" class="form-control" name= "accident_description" id="accident_description" placeholder="Enter accident location">"</textarea>
+                                </div>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="raise_event" class="btn btn-default" data-dismiss="modal">Raise Event</button>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

@@ -13,6 +13,10 @@ public class Utils {
         return Timestamp.valueOf(date.atStartOfDay());
     }
 
+    public static LocalDate convertTime(Timestamp date) {
+        return date.toLocalDateTime().toLocalDate();
+    }
+
     public static <T> T extractValue(HttpServletRequest request, String name, T defaultValue) {
         String param = request.getParameter(name);
         boolean hasValue = param != null && !param.isEmpty();

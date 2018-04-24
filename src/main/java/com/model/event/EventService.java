@@ -18,6 +18,10 @@ public interface EventService {
 
     void update(Event event);
 
+    void raise(Event id);
+
     List<Event> selectByStatus(EventStatus status);
+
+    List<Event> getAccidentEvents();
 
 }

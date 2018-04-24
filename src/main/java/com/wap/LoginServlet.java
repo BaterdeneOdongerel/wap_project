@@ -2,6 +2,7 @@ package com.wap;
 
 
 
+import com.model.user.UserService;
 import com.model.user.UserServiceImpl;
 import com.props.MessagesProp;
 
@@ -21,7 +22,7 @@ public class LoginServlet extends BaseServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        UserServiceImpl userModel = new UserServiceImpl();
+        UserService userModel = Services.UserService;
         boolean success = userModel.login(email, password);
         if (success) {
 

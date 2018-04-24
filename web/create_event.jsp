@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="title">Title</label>
                     <div class="col-sm-7">
-                        <input required type="text" class="form-control" id="title" placeholder="Enter the trip title">
+                        <input required type="text" class="form-control" name="title" id="title" placeholder="Enter the trip title">
                     </div>
                 </div>
 
@@ -54,9 +54,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="start_location">Start Location</label>
+                    <label class="control-label col-sm-2" for="begin_location">Start Location</label>
                     <div class="col-sm-7">
-                        <input required type="text" id="start_location" class="form-control" name="start_location" id="start_location" placeholder="Enter starting location">
+                        <input required type="text" id="begin_location" class="form-control" name="begin_location" id="begin_location" placeholder="Enter starting location">
                     </div>
                 </div>
 

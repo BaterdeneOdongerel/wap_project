@@ -24,13 +24,26 @@ function registerEvents() {
             $("#notification" ).text(errorMessage);
         }
     })
+
+    $("#raise").click(function () {
+        $("#raise_modal").modal();
+    })
+
+    $("#raise_event").click(function () {
+        const id = $("#id").val();
+        alert(id);
+        const location = $("#accident_location").val();
+        const description = $("#accident_location").text();
+        raiseEvent(id, location, description);
+    })
+
 }
 
 function validate() {
     const title = $("#title");
     const start_date = $("#start_date");
     const start_time = $("#start_time");
-    const start_location = $("#start_location");
+    const start_location = $("#begin_location");
     const end_location = $("#end_location");
     const distance = $("#distance");
     var missing = required(title) || required(start_date) ||  required(start_time) || required(end_location) || required(start_location) || required(distance);
@@ -48,23 +61,51 @@ function required(element) {
     }
 }
 
-function postEvent() {
-    const data = $('#create_form').serialize();
-    $.ajax("/create_event"
+function raiseEvent(id, location, description) {
+    const data = {id: id, accident_location: location, accident_description: description}
+    $.ajax("/raise_event"
         , {
             "type": "POST",
-            "data": data,
+            "date": data,
         }).done(function (data) {
-            $( "#error-box" ).hide();
-            $('#create_form')[0].reset();
-            $("#error-box" ).show();
-            $("#notification" ).text("Cool! Event Created");
+            window.location.reload;
         }
     ).fail(function () {
 
     });
 }
 
+function postEvent() {
+    const data = $('#create_form').serialize();
+    const id = $('#id').val();
+    if (id) {
+        $.ajax("/edit_event"
+            , {
+                "type": "POST",
+                "data": data,
+            }).done(function (data) {
+                $("#error-box" ).show();
+                $("#notification" ).text("Cool! Event Updated");
+            }
+        ).fail(function () {
+
+        });
+    } else {
+        $.ajax("/create_event"
+            , {
+                "type": "POST",
+                "data": data,
+            }).done(function (data) {
+                $( "#error-box" ).hide();
+                $('#create_form')[0].reset();
+                $("#error-box" ).show();
+                $("#notification" ).text("Cool! Event Created");
+            }
+        ).fail(function () {
+
+        });
+    }
+}
 
 $(document).ready(function () {
     registerEvents();

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Event {
     private int id ;
+    private int owner ;
     private String title;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -19,8 +20,8 @@ public class Event {
     private Boolean hasAccident;
     private String accidentLocation;
     private String accidentDescription;
+    private Access access;
 
-    
 
     public int getId() {
         return id;
@@ -116,5 +117,21 @@ public class Event {
 
     public void setAccidentDescription(String accidentDescription) {
         this.accidentDescription = accidentDescription;
+    }
+
+    public Access getAccess() {
+        return access;
+    }
+
+    public void setAccess(Access access) {
+        this.access = access;
+    }
+
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
     }
 }

@@ -18,9 +18,9 @@ import static com.utils.Utils.extractValue;
 @WebServlet("/edit")
 public class EditEventServlet extends BaseServlet {
     protected void post(HttpServletRequest request, HttpServletResponse response) {
-        Integer id = extractValue(request, "id", 0);
+        String id = extractValue(request, "id", "");
         Event event = new Event();
-        event.setId(id);
+        event.setId(Integer.parseInt(id));
         String title = extractValue(request, "title", "");
         LocalDate startDate = extractDate(request, "start_date", LocalDate.now());
         LocalDate endDate = extractDate(request, "end_date", LocalDate.now());
@@ -46,6 +46,9 @@ public class EditEventServlet extends BaseServlet {
 
     protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("event_edit.jsp");
+        String id = extractValue(request, "event_id", "");
+        Event event = Services.EventService.selectById(Integer.parseInt(id));
+        request.setAttribute("event", event);
         view.forward(request, response);
     }
 }

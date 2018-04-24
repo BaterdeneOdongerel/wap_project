@@ -3,10 +3,12 @@ package com.model.event;
 import com.db.ConnectionConfiguration;
 import com.utils.Utils;
 import com.wap.EventStatus;
+import com.wap.Services;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
@@ -21,8 +23,8 @@ public class EventServiceImpl implements EventService {
 
             preparedStatement = connection.prepareStatement(
                     "INSERT into Event(title, start_date, end_date, begin_location, " +
-                            "end_location, distance, comment, status, accident_location, accident_description, hasAccident) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            "end_location, distance, comment, status, accident_location, accident_description, hasAccident, owner) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, event.getTitle());
             preparedStatement.setTimestamp(2, Utils.convertTime(event.getStartDate()));
             preparedStatement.setTimestamp(3, Utils.convertTime(event.getEndDate()));
@@ -34,6 +36,7 @@ public class EventServiceImpl implements EventService {
             preparedStatement.setString(9, event.getAccidentLocation());
             preparedStatement.setString(10, event.getAccidentDescription());
             preparedStatement.setBoolean(11, false);
+            preparedStatement.setInt(12, Services.UserService.getCurrentUser().getUserId());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -59,7 +62,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event selectById(int id) {
-        Event user = new Event();
+        Event event = new Event();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -71,7 +74,13 @@ public class EventServiceImpl implements EventService {
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                //user.setUserId(resultSet.getInt("user_id"));
+                event.setId(resultSet.getInt("id"));
+                event.setTitle(resultSet.getString("title"));
+                event.setStartDate(Utils.convertTime(resultSet.getTimestamp("start_date")));
+                event.setBeginLocation(resultSet.getString("begin_location"));
+                event.setEndLocation(resultSet.getString("end_location"));
+                event.setComment(resultSet.getString("comment"));
+                event.setDistance(resultSet.getFloat("distance"));
             }
 
         } catch (Exception e) {
@@ -100,7 +109,7 @@ public class EventServiceImpl implements EventService {
             }
         }
 
-        return user;
+        return event;
     }
 
     @Override
@@ -192,9 +201,17 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             preparedStatement = connection
-                    .prepareStatement("UPDATE event SET " + "first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
+                    .prepareStatement("UPDATE event SET title=?, start_date=?, end_date=?, begin_location=?, " +
+                            "end_location=?, distance=?, comment=? WHERE id=?");
 
-            preparedStatement.setInt(4, event.getId());
+            preparedStatement.setString(1, event.getTitle());
+            preparedStatement.setTimestamp(2, Utils.convertTime(event.getStartDate()));
+            preparedStatement.setTimestamp(3, Utils.convertTime(event.getEndDate()));
+            preparedStatement.setString(4, event.getBeginLocation());
+            preparedStatement.setString(5, event.getEndLocation());
+            preparedStatement.setFloat(6, event.getDistance().floatValue());
+            preparedStatement.setString(7, event.getComment());
+            preparedStatement.setInt(8, event.getId());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -217,23 +234,64 @@ public class EventServiceImpl implements EventService {
         }
     }
 
+    @Override
+    public void raise(Event event) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection
+                    .prepareStatement("UPDATE event SET has_accident=?, accident_location=?, accident_description=? WHERE id=?");
+
+            preparedStatement.setBoolean(1, event.getHasAccident());
+            preparedStatement.setString(2, event.getAccidentLocation());
+            preparedStatement.setString(3, event.getAccidentDescription());
+            preparedStatement.setInt(4, event.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 
     @Override
     public List<Event> selectByStatus(EventStatus status) {
-        List<Event> users = new ArrayList<Event>();
+        List<Event> events = new ArrayList<Event>();
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
+        ResultSet resultSet2 = null;
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
             String qry = "SELECT * FROM event WHERE status = '" + status.toString() + "'" ;
+            String query2 = "SELECT * FROM userevent event WHERE user_id = '" + Services.UserService.getCurrentUser().getUserId() + "'" ;
 
             resultSet = statement.executeQuery(qry);
+            HashMap<Integer, Event> eventMap = new HashMap<>();
 
             while (resultSet.next()) {
                 Event event = new Event();
-                event.setId( resultSet.getInt("id") );
+                int id = resultSet.getInt("id");
+                event.setId(id);
                 event.setTitle( resultSet.getString("title") );
                 event.setStartDate(LocalDate.parse(resultSet.getString("start_date").substring(0,10) ) );
                 event.setEndDate( LocalDate.parse(resultSet.getString("end_date").substring(0,10) ) );
@@ -244,7 +302,22 @@ public class EventServiceImpl implements EventService {
                 event.setStatus( resultSet.getString("status") );
                 event.setAccidentLocation( resultSet.getString("accident_location") );
                 event.setHasAccident( resultSet.getBoolean("hasAccident") );
-                users.add(event);
+                event.setOwner( resultSet.getInt("owner") );
+                events.add(event);
+                eventMap.put(id, event);
+            }
+
+            statement = connection.createStatement();
+            resultSet2 = statement.executeQuery(query2);
+
+            while (resultSet2.next()) {
+                String eventId = resultSet2.getString("event_id");
+                Event event = eventMap.get(eventId);
+                if (event.getOwner() == Services.UserService.getCurrentUser().getUserId()) {
+                    event.setAccess(Access.OWNER);
+                } else {
+                    event.setAccess(Access.PARTICIPATING);
+                }
             }
 
         } catch (Exception e) {
@@ -273,9 +346,63 @@ public class EventServiceImpl implements EventService {
             }
         }
 
-        return users;
+        return events;
     }
 
+    @Override
+    public List<Event> getAccidentEvents() {
+        List<Event> events = new ArrayList<Event>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            statement = connection.createStatement();
+            String qry = "SELECT * FROM event WHERE hasAccident = 1" ;
+
+            resultSet = statement.executeQuery(qry);
+            HashMap<Integer, Event> eventMap = new HashMap<>();
+
+            while (resultSet.next()) {
+                Event event = new Event();
+                int id = resultSet.getInt("id");
+                event.setId(id);
+                event.setTitle( resultSet.getString("title") );
+                event.setAccidentLocation( resultSet.getString("accident_location") );
+                event.setAccidentDescription( resultSet.getString("accident_description") );
+                event.setHasAccident( resultSet.getBoolean("hasAccident") );
+                event.setOwner( resultSet.getInt("owner") );
+                events.add(event);
+                eventMap.put(id, event);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return events;
+    }
 
 
     public static void main(String[] args) {

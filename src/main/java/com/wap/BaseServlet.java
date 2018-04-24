@@ -1,11 +1,15 @@
 package com.wap;
 
+import com.model.event.Event;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Van on 4/23/18.
@@ -13,10 +17,23 @@ import java.io.IOException;
 public abstract class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (filterRequest(request, response))
+            if (filterRequest(request, response)) {
+                checkAccidents(request, response);
                 post(request, response);
+            }
+
         } catch (Exception ex) {
             handleException(request, response, ex);
+        }
+    }
+
+    private void checkAccidents(HttpServletRequest request, HttpServletResponse response) {
+        List<Event> accidents = Services.EventService.getAccidentEvents();
+        if (accidents != null && accidents.size() > 0) {
+            String accidentLists = accidents.stream().map(accident -> accident.getAccidentDescription()).collect(Collectors.joining("<br>"));
+            request.getSession().setAttribute("accidents", accidentLists);
+        } else {
+            request.getSession().setAttribute("accidents", null);
         }
     }
 
@@ -27,8 +44,11 @@ public abstract class BaseServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (filterRequest(request, response))
+            if (filterRequest(request, response)) {
+                checkAccidents(request, response);
                 get(request, response);
+            }
+
         } catch (Exception ex) {
             handleException(request, response, ex);
         }

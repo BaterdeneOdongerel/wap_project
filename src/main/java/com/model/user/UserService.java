@@ -18,4 +18,6 @@ public interface UserService {
     boolean login(String email, String password);
 
     List<User> selectbyName(String name);
+
+    User getCurrentUser();
 }

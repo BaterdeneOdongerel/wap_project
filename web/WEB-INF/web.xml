@@ -33,6 +33,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>RaiseEventServlet</servlet-name>
+        <servlet-class>com.wap.RaiseEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RaiseEventServlet</servlet-name>
+        <url-pattern>/raise_event</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>JoinAjaxServlet</servlet-name>
         <servlet-class>com.ajax.JoinAjaxServlet</servlet-class>
     </servlet>
