@@ -310,7 +310,7 @@ public class EventServiceImpl implements EventService {
             resultSet2 = statement.executeQuery(query2);
 
             while (resultSet2.next()) {
-                String eventId = resultSet2.getString("event_id");
+                Integer eventId = resultSet2.getInt("event_id");
                 Event event = eventMap.get(eventId);
                 if (event.getOwner() == Services.UserService.getCurrentUser().getUserId()) {
                     event.setAccess(Access.OWNER);
