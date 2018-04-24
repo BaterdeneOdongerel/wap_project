@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Event {
     private int id ;
-    private int owner ;
+    private Integer owner ;
     private String title;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -127,11 +127,19 @@ public class Event {
         this.access = access;
     }
 
-    public int getOwner() {
+    public Integer getOwner() {
         return owner;
     }
 
     public void setOwner(int owner) {
         this.owner = owner;
+    }
+
+    public boolean isOwner() {
+        return access == Access.OWNER;
+    }
+
+    public boolean isParticipate() {
+        return access == Access.PARTICIPATING;
     }
 }
