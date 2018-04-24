@@ -31,10 +31,10 @@ function registerEvents() {
 
     $("#raise_event").click(function () {
         const location = $("#accident_location").val();
-        const description = $("#accident_location").text();
-        raiseEvent($("#id").val(), location, description);
+        const description = $("#accident_description").val();
+        const id = $("#id").val();
+        raiseEvent(id, location, description);
     })
-
 }
 
 function validate() {
@@ -66,7 +66,7 @@ function raiseEvent(id, location, description) {
             "type": "POST",
             "data": data,
         }).done(function (data) {
-            window.location.reload;
+            window.location.reload();
         }
     ).fail(function () {
 

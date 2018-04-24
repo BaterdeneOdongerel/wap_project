@@ -30,7 +30,7 @@ public abstract class BaseServlet extends HttpServlet {
     private void checkAccidents(HttpServletRequest request, HttpServletResponse response) {
         List<Event> accidents = Services.EventService.getAccidentEvents();
         if (accidents != null && accidents.size() > 0) {
-            String accidentLists = accidents.stream().map(accident -> accident.getAccidentDescription()).collect(Collectors.joining("<br>"));
+            String accidentLists = accidents.stream().map(accident -> accident.getAccidentDescription() + " at " + accident.getAccidentLocation()).collect(Collectors.joining("<br>"));
             request.getSession().setAttribute("accidents", accidentLists);
         } else {
             request.getSession().setAttribute("accidents", null);
