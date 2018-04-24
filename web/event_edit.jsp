@@ -84,12 +84,27 @@
                 </div>
 
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
-                        <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
-                    </div>
-                </div>
+                <c:choose>
+                    <c:when test="${event.isOwner() == true}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
+                                <button type="button" id="start" class="btn btn-success btn-lg">Start</button>
+                                <button type="button" id="stop" class="btn btn-success btn-lg">Stop</button>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:when test="${event.isParticipate()  == true}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
+                            </div>
+                        </div>
+                    </c:when>
+
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
 
             </form>
 

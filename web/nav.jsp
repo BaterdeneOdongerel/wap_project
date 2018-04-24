@@ -22,7 +22,6 @@
                         <li><a href="live">Live Cycling Events</a></li>
                         <li><a href="users">Users</a></li>
                         <li><a href="create">Create event</a></li>
-                        <li><a href="myevents">My events</a></li>
                     </c:if>
 
                 </ul>
