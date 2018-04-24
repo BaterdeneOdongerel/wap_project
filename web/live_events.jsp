@@ -32,7 +32,7 @@
                 </center>
             </div>
 
-            <h3>Upcoming Cycling Events</h3>
+            <h3>Live Cycling Events</h3>
 
             <% List<Event> event = (List<Event>)request.getAttribute("events");%>
             <% List<UserEvent> userEvent = (List<UserEvent>)request.getAttribute("userevent");%>
