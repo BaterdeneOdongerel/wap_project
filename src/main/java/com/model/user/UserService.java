@@ -15,4 +15,6 @@ public interface UserService {
     void update(User user, int id);
     
     boolean login(String email, String password);
+
+    List<User> selectbyName(String name);
 }

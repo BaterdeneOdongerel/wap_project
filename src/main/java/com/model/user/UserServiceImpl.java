@@ -260,6 +260,58 @@ public class UserServiceImpl implements UserService {
         return ret;
     }
 
+    @Override
+    public List<User> selectbyName(String name) {
+        List<User> users = new ArrayList<User>();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM user WHERE user_name like '%"+ name+"%'");
+            System.out.print("SELECT * FROM user WHERE user_name like '%"+ name+"%'");
+            while (resultSet.next()) {
+                User user = new User();
+                user.setUserId(resultSet.getInt("id"));
+                user.setUsername(resultSet.getString("user_name"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPassword(resultSet.getString("password"));
+                users.add(user);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return users;
+    }
+
     public User getCurrentUser() {
         return currentUser;
     }
@@ -273,5 +325,8 @@ public class UserServiceImpl implements UserService {
         } else {
             System.out.println(MessagesProp.INSTANCE.getProp("errorLogin"));
         }
+        List<User> us = userModel.selectbyName("ba");
+
+
     }
 }

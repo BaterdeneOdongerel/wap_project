@@ -23,6 +23,27 @@
         <url-pattern>/create_event</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>JoinAjaxServlet</servlet-name>
+        <servlet-class>com.ajax.JoinAjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinAjaxServlet</servlet-name>
+        <url-pattern>/joinAjax</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>LeaveAjaxServlet</servlet-name>
+        <servlet-class>com.ajax.LeaveAjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LeaveAjaxServlet</servlet-name>
+        <url-pattern>/leaveAjax</url-pattern>
+    </servlet-mapping>
+
+
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>/public/*</url-pattern>

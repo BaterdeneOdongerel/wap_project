@@ -43,6 +43,69 @@ public class UserEventImpl implements UserEventService {
         }
     }
 
+    @Override
+    public void insert(int eventid, int userid) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement("INSERT INTO userevent (event_id, user_id, owner)"
+                    + "VALUES (" + eventid+" ," + userid+", 0)");
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void delete(int eventid, int userid) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement("DELETE FROM userevent WHERE user_id = ? and event_id = ?");
+            preparedStatement.setInt(1,userid );
+            preparedStatement.setInt(2,eventid );
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
     @Override
@@ -215,7 +278,7 @@ public class UserEventImpl implements UserEventService {
             statement = connection.createStatement();
             String qry = "SELECT * FROM userevent WHERE user_id = '" + user.getUserId() +
                     "' and event_id = '" + event.getId() +"'" ;
-            System.out.println("==" + qry +"==");
+
             resultSet = statement.executeQuery(qry);
 
             while (resultSet.next()) {

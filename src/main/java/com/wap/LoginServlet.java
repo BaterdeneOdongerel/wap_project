@@ -22,7 +22,6 @@ public class LoginServlet extends BaseServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         UserServiceImpl userModel = new UserServiceImpl();
-        System.out.println("------>" + email + "==" + password + "===");
         boolean success = userModel.login(email, password);
         if (success) {
 

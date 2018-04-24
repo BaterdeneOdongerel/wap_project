@@ -29,4 +29,10 @@ public class Utils {
         boolean hasValue = param != null && !param.isEmpty();
         return hasValue ? Float.parseFloat(param) : defaultValue;
     }
+
+    public static Integer extractInteger(HttpServletRequest request, String name, Integer defaultValue) {
+        String param = request.getParameter(name);
+        boolean hasValue = param != null && !param.isEmpty();
+        return hasValue ? Integer.parseInt(param) : defaultValue;
+    }
 }

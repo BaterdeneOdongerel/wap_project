@@ -11,26 +11,31 @@
 
     <title>$Title$</title>
     <jsp:include page="header.jsp" />
-    <link rel="stylesheet" type="text/css" href="/rsc/css/main.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/main.css">
 </head>
 <body>
-
+<script src="./public/js/user.js"></script>
 <jsp:include page="nav.jsp" />
 
 <div class="back_container">
     <div class="container text-center">
         <div class="body_content text-left">
             <h3>Users</h3>
+            <div class="loader">
+                <center>
+                    <img class="loading-image" src="./public/images/loader.gif" alt="loading.." width="200px"  height="200px">
+                </center>
+            </div>
             <div class="col-sm-5">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
+                    <input type="text" class="form-control" placeholder="Search" name="search" id="search">
                     <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        <button class="btn btn-default" id="btnsearch"type="submit"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
                 </div>
             </div>
 
-            <table class="table table-striped">
+            <table class="table table-striped" id="mytable">
                 <thead>
                 <tr>
                     <th>Username</th>
@@ -42,39 +47,7 @@
 
                 </thead>
                 <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span> Search
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>John</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span> Search
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>John</td>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span> Update
-                        </button>
-                    </td>
-                </tr>
+
                 </tbody>
             </table>
 

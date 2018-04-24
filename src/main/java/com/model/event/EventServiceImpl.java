@@ -233,7 +233,7 @@ public class EventServiceImpl implements EventService {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
             String qry = "SELECT * FROM event WHERE status = '" + status + "'" ;
-            System.out.println("========>" + qry);
+
             resultSet = statement.executeQuery(qry);
 
             while (resultSet.next()) {
