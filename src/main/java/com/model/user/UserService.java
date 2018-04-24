@@ -5,6 +5,7 @@ import java.util.List;
 public interface UserService {
 
     void insert(User user);
+    User selectByEmail(String email);
 
     User selectById(int id);
 

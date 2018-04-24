@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
     <title>$Title$</title>
     <jsp:include page="header.jsp" />
     <link rel="stylesheet" type="text/css" href="/rsc/css/main.css">
@@ -16,21 +15,25 @@
 <body>
 
 <jsp:include page="nav.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="back_container">
     <div class="container text-center">
         <div class="body_content text-left col-sm-7">
             <h3>Sign up</h3>
 
-            <form class="form-horizontal" action="/action_page.php">
-
-
+            <form class="form-horizontal" action="/signup" method="post">
+                <c:if test="${error != 'm'}">
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong> ${error}
+                    </div>
+                </c:if>
                 <div class="form-group">
 
                     <label class="control-label col-sm-2" for="username">Username:</label>
 
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                        <input type="text" value="${param['username']}" class="form-control" id="username" placeholder="Enter username"/>
                     </div>
 
                 </div>
@@ -74,7 +77,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default btn-lg">Sign up</button>
+                        <button type="submit" id="signup" class="btn btn-default btn-lg">Sign up</button>
                     </div>
                 </div>
 

@@ -18,12 +18,13 @@ public class UserServiceImpl implements UserService {
 
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("INSERT INTO user (first_name, last_name, email, password, type, "
-                    + "status, created, insurance_company)" + "VALUES (?, ?, ?, ?, ?, ?, sysdate(), ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO user (first_name, last_name, email, password, user_name) "
+                    + " VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getUsername());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -45,6 +46,58 @@ public class UserServiceImpl implements UserService {
                 }
             }
         }
+    }
+
+    @Override
+    public User selectByEmail(String email) {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE email = ?");
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                user = new User();
+                user.setUserId(resultSet.getInt("id"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setEmail(resultSet.getString("email"));
+                user.setUsername(resultSet.getString("user_name"));
+                user.setPassword(resultSet.getString("password"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return user;
     }
 
     @Override
@@ -326,6 +379,8 @@ public class UserServiceImpl implements UserService {
             System.out.println(MessagesProp.INSTANCE.getProp("errorLogin"));
         }
         List<User> us = userModel.selectbyName("ba");
+        User u = userModel.selectByEmail("bati@gmail.com");
+        System.out.println("====>" + u.getEmail());
 
 
     }
