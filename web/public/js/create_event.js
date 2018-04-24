@@ -1,6 +1,6 @@
 function registerEvents() {
-    $( "#error-box" ).hide();
-    $( "#start_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#error-box").hide();
+    $("#start_date").datepicker({dateFormat: 'yy-mm-dd'});
     $("#start_time").timepicker({
         timeFormat: 'h:mm p',
         interval: 60,
@@ -20,8 +20,8 @@ function registerEvents() {
         if (!errorMessage) {
             postEvent();
         } else {
-            $("#error-box" ).show();
-            $("#notification" ).text(errorMessage);
+            $("#error-box").show();
+            $("#notification").text(errorMessage);
         }
     })
 
@@ -35,6 +35,19 @@ function registerEvents() {
         const id = $("#id").val();
         raiseEvent(id, location, description);
     })
+
+    $("#start").click(function () {
+        const status = "On going";
+        const description = $("#accident_description").val();
+        const id = $("#id").val();
+        changeStatus(id, status);
+    })
+
+    $("#stop").click(function () {
+        const status = "Ended";
+        const id = $("#id").val();
+        changeStatus(id, status);
+    })
 }
 
 function validate() {
@@ -44,7 +57,7 @@ function validate() {
     const start_location = $("#begin_location");
     const end_location = $("#end_location");
     const distance = $("#distance");
-    var missing = required(title) || required(start_date) ||  required(start_time) || required(end_location) || required(start_location) || required(distance);
+    var missing = required(title) || required(start_date) || required(start_time) || required(end_location) || required(start_location) || required(distance);
     return missing ? "Please fill out missing information!" : undefined;
 
 }
@@ -73,6 +86,21 @@ function raiseEvent(id, location, description) {
     });
 }
 
+function changeStatus(id, status) {
+    const data = {id: id, status: status}
+    $.ajax("/change_status"
+        , {
+            "type": "POST",
+            "data": data,
+        }).done(function (data) {
+            $("#error-box").show();
+            $("#notification").text("Status Updated");
+        }
+    ).fail(function () {
+
+    });
+}
+
 function postEvent() {
     const data = $('#create_form').serialize();
     const id = $('#id').val();
@@ -82,8 +110,8 @@ function postEvent() {
                 "type": "POST",
                 "data": data,
             }).done(function (data) {
-                $("#error-box" ).show();
-                $("#notification" ).text("Cool! Event Updated");
+                $("#error-box").show();
+                $("#notification").text("Cool! Event Updated");
             }
         ).fail(function () {
 
@@ -94,10 +122,10 @@ function postEvent() {
                 "type": "POST",
                 "data": data,
             }).done(function (data) {
-                $( "#error-box" ).hide();
+                $("#error-box").hide();
                 $('#create_form')[0].reset();
-                $("#error-box" ).show();
-                $("#notification" ).text("Cool! Event Created");
+                $("#error-box").show();
+                $("#notification").text("Cool! Event Created");
             }
         ).fail(function () {
 

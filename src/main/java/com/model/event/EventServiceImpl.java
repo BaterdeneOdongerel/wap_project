@@ -2,7 +2,6 @@ package com.model.event;
 
 import com.db.ConnectionConfiguration;
 import com.utils.Utils;
-import com.wap.EventStatus;
 import com.wap.Services;
 
 import java.sql.*;
@@ -127,8 +126,8 @@ public class EventServiceImpl implements EventService {
             while (resultSet.next()) {
                 Event event = new Event();
 
-               // event.setPassword(resultSet.getString("password"));
-               // users.add(user);
+                // event.setPassword(resultSet.getString("password"));
+                // users.add(user);
             }
 
         } catch (Exception e) {
@@ -270,9 +269,44 @@ public class EventServiceImpl implements EventService {
 
     }
 
+    @Override
+    public void updateStatus(String status, Integer id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = ConnectionConfiguration.getConnection();
+            preparedStatement = connection
+                    .prepareStatement("UPDATE event SET status=? WHERE id=?");
+
+            preparedStatement.setString(1, status.toString());
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
 
     @Override
-    public List<Event> selectByStatus(EventStatus status) {
+    public List<Event> selectByStatus(String status) {
         List<Event> events = new ArrayList<Event>();
         Connection connection = null;
         Statement statement = null;
@@ -281,10 +315,10 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            String qry = "SELECT * FROM event WHERE status = '" + status.toString() + "'" ;
+            String qry = "SELECT * FROM event WHERE status = '" + status+ "'" ;
             String query2 = "SELECT * FROM userevent event WHERE user_id = '" + Services.UserService.getCurrentUser().getUserId() + "'" ;
 
-            resultSet = statement.executeQuery(qry);
+                    resultSet = statement.executeQuery(qry);
             HashMap<Integer, Event> eventMap = new HashMap<>();
 
             while (resultSet.next()) {

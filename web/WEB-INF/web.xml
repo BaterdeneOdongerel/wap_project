@@ -42,6 +42,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <servlet-class>com.wap.ChangeStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <url-pattern>/change_status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>JoinAjaxServlet</servlet-name>
         <servlet-class>com.ajax.JoinAjaxServlet</servlet-class>
     </servlet>

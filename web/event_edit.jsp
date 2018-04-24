@@ -85,7 +85,7 @@
 
 
                 <c:choose>
-                    <c:when test="${event.isOwner() == true}">
+                    <c:when test="${false}">
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
@@ -94,14 +94,6 @@
                             </div>
                         </div>
                     </c:when>
-                    <c:when test="${event.isParticipate()  == true}">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
-                            </div>
-                        </div>
-                    </c:when>
-
                     <c:otherwise>
                     </c:otherwise>
                 </c:choose>
