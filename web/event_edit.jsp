@@ -85,7 +85,7 @@
 
 
                 <c:choose>
-                    <c:when test="${false}">
+                    <c:when test="${'name' == 'blae'}">
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
@@ -94,8 +94,13 @@
                             </div>
                         </div>
                     </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
+                    <c:when test="${'name' == 'name'}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
+                            </div>
+                        </div>
+                    </c:when>
                 </c:choose>
 
             </form>
