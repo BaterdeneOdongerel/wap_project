@@ -1,8 +1,5 @@
 package com.model.event;
 
-import com.model.user.User;
-import com.wap.EventStatus;
-
 import java.util.List;
 
 public interface EventService {
@@ -18,9 +15,11 @@ public interface EventService {
 
     void update(Event event);
 
+    void updateStatus(String eventStatus, Integer id);
+
     void raise(Event id);
 
-    List<Event> selectByStatus(EventStatus status);
+    List<Event> selectByStatus(String status);
 
     List<Event> getAccidentEvents();
 
