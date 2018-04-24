@@ -1,6 +1,7 @@
 package com.model.event;
 
 import com.model.user.User;
+import com.wap.EventStatus;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public interface EventService {
 
     void update(Event event);
 
-    List<Event> selectByStatus(String status);
+    List<Event> selectByStatus(EventStatus status);
 
 }

@@ -24,6 +24,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>EditEventServlet</servlet-name>
+        <servlet-class>com.wap.EditEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditEventServlet</servlet-name>
+        <url-pattern>/edit_event</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>JoinAjaxServlet</servlet-name>
         <servlet-class>com.ajax.JoinAjaxServlet</servlet-class>
     </servlet>

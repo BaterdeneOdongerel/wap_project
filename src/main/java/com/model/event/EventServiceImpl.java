@@ -1,18 +1,13 @@
 package com.model.event;
 
 import com.db.ConnectionConfiguration;
-
 import com.utils.Utils;
-
-import com.model.user.User;
-
+import com.wap.EventStatus;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class EventServiceImpl implements EventService {
 
@@ -35,7 +30,7 @@ public class EventServiceImpl implements EventService {
             preparedStatement.setString(5, event.getEndLocation());
             preparedStatement.setFloat(6, event.getDistance().floatValue());
             preparedStatement.setString(7, event.getComment());
-            preparedStatement.setString(8, event.getStatus());
+            preparedStatement.setString(8, "Upcoming");
             preparedStatement.setString(9, event.getAccidentLocation());
             preparedStatement.setString(10, event.getAccidentDescription());
             preparedStatement.setBoolean(11, false);
@@ -224,7 +219,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public List<Event> selectByStatus(String status) {
+    public List<Event> selectByStatus(EventStatus status) {
         List<Event> users = new ArrayList<Event>();
         Connection connection = null;
         Statement statement = null;
@@ -232,7 +227,7 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            String qry = "SELECT * FROM event WHERE status = '" + status + "'" ;
+            String qry = "SELECT * FROM event WHERE status = '" + status.toString() + "'" ;
 
             resultSet = statement.executeQuery(qry);
 

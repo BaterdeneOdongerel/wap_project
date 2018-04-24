@@ -42,7 +42,6 @@ public class EditEventServlet extends BaseServlet {
         event.setAccidentLocation("");
         event.setHasAccident(false);
         Services.EventService.update(event);
-
     }
 
     protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -17,6 +17,19 @@ function initial() {
         }
     });
 
+    $("#edit_event").click(function () {
+        const eventid = $(this).attr("data-event");
+        const userid = $(this).attr("data-user");
+        $.ajax("/edit_event"
+            , { "type": "GET",
+                "data": { "eventid": eventid,
+                    "userid": userid },
+            }) .done( function(data){
+            }
+        ).fail(function(){
+        });
+    })
+
 }
 
 function checkValidation() {
