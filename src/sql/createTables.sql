@@ -1,4 +1,4 @@
-create event_management;
+create database event_management;
 use event_management;
 CREATE TABLE IF NOT EXISTS `User` (
 	`id` BIGINT NOT NULL AUTO_INCREMENT,
