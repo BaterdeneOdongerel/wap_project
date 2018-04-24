@@ -51,10 +51,8 @@
                     </h5>
                     <p> start: <%= event.get(i).getStartDate() %> </p>
                     <p> <%= event.get(i).getBeginLocation() %> </p>
-                    <span class="label label-info">Upcoming</span>
+                    <span class="label label-info">On Going</span>
                     <a><button type="button" event="edit" class="btn btn-primary btn-sm" data-event="<%=event.get(i).getId()%>" data-user="${user.userId}">Details</button></a>
-                    <a><button type="button" event="join" class="btn btn-success btn-sm <%= userEvent.get(i) != null ? "hidden" : ""%>" data-event="<%=event.get(i).getId()%>" data-user="${user.userId}">Join</button></a>
-                    <a><button type="button" event="leave" class="btn btn-warning btn-sm <%= userEvent.get(i) == null ? "hidden" : ""%>" data-event="<%=event.get(i).getId()%>" data-user="${user.userId}" >Leave</button></a>
                 </div>
                 <% }%>
 
