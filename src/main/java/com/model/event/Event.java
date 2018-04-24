@@ -16,7 +16,7 @@ public class Event {
     private Boolean hasAccident;
     private String accidentLocation;
     private String accidentDescription;
-    private Access access;
+    private String access;
 
 
     public int getId() {
@@ -115,11 +115,11 @@ public class Event {
         this.accidentDescription = accidentDescription;
     }
 
-    public Access getAccess() {
+    public String getAccess() {
         return access;
     }
 
-    public void setAccess(Access access) {
+    public void setAccess(String access) {
         this.access = access;
     }
 
@@ -131,11 +131,4 @@ public class Event {
         this.owner = owner;
     }
 
-    public boolean isOwner() {
-        return access == Access.OWNER;
-    }
-
-    public boolean isParticipate() {
-        return access == Access.PARTICIPATING;
-    }
 }

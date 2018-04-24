@@ -71,6 +71,7 @@ public class EventServiceImpl implements EventService {
             preparedStatement = connection.prepareStatement("SELECT * FROM event WHERE id = ?");
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
+            int userId = Services.UserService.getCurrentUser().getUserId();
 
             while (resultSet.next()) {
                 event.setId(resultSet.getInt("id"));
@@ -79,7 +80,21 @@ public class EventServiceImpl implements EventService {
                 event.setBeginLocation(resultSet.getString("begin_location"));
                 event.setEndLocation(resultSet.getString("end_location"));
                 event.setComment(resultSet.getString("comment"));
+                event.setStatus(resultSet.getString("status"));
                 event.setDistance(resultSet.getFloat("distance"));
+
+                if (resultSet.getInt("owner") == userId)
+                    event.setAccess("owner");
+            }
+
+            Statement statement = connection.createStatement();
+            String qry2 = "SELECT * FROM userevent WHERE user_id = " + userId + " AND event_id=" + event.getId();
+            ResultSet resultSet2 = statement.executeQuery(qry2);
+
+            while (resultSet2.next()) {
+                if (event.getAccess() != "owner") {
+                    event.setAccess("participating");
+                }
             }
 
         } catch (Exception e) {
@@ -316,10 +331,10 @@ public class EventServiceImpl implements EventService {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
             String qry = "SELECT * FROM event WHERE status = '" + status+ "'" ;
-            String query2 = "SELECT * FROM userevent event WHERE user_id = '" + Services.UserService.getCurrentUser().getUserId() + "'" ;
+            int userId = Services.UserService.getCurrentUser().getUserId();
 
-                    resultSet = statement.executeQuery(qry);
-            HashMap<Integer, Event> eventMap = new HashMap<>();
+            resultSet = statement.executeQuery(qry);
+
 
             while (resultSet.next()) {
                 Event event = new Event();
@@ -337,20 +352,6 @@ public class EventServiceImpl implements EventService {
                 event.setHasAccident( resultSet.getBoolean("hasAccident") );
                 event.setOwner( resultSet.getInt("owner") );
                 events.add(event);
-                eventMap.put(id, event);
-            }
-
-            statement = connection.createStatement();
-            resultSet2 = statement.executeQuery(query2);
-
-            while (resultSet2.next()) {
-                Integer eventId = resultSet2.getInt("event_id");
-                Event event = eventMap.get(eventId);
-                if (event.getOwner() == Services.UserService.getCurrentUser().getUserId()) {
-                    event.setAccess(Access.OWNER);
-                } else {
-                    event.setAccess(Access.PARTICIPATING);
-                }
             }
 
         } catch (Exception e) {
