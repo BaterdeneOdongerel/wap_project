@@ -1,6 +1,5 @@
 function initial() {
     $("button[event='edit']").on("click", function() {
-        alert("Clickin");
         const eventid = $(this).attr("data-event");
         const userid = $(this).attr("data-user");
         window.location.href = "/edit_event?event_id=" + eventid + "&user_id=" + userid;

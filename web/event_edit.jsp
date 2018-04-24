@@ -102,17 +102,12 @@
                             </div>
                         </div>
                     </c:when>
-                    <c:when test="${(event.access == 'participating' || event.access == 'owner') && event.status == 'On going'}">
+
+                    <c:when test="${(event.access == 'owner' || event.access == 'participating') && event.status == 'On going'}">
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="raise" class="btn btn-danger btn-lg">Raise</button>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:when test="${event.access == 'owner' && event.status == 'On going'}">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="stop" class="btn btn-success btn-lg">Stop</button>
+                            <div class="col-md-offset-2">
+                                <button type="button" id="stop" class="btn btn-primary">Stop</button>
+                                <button type="button" id="raise" class="btn btn-danger">Raise</button>
                             </div>
                         </div>
                     </c:when>
