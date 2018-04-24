@@ -9,7 +9,7 @@
 <html>
 <head>
 
-    <title>$Title$</title>
+    <title>Cycla</title>
     <jsp:include page="header.jsp" />
     <link rel="stylesheet" type="text/css" href="./public/css/main.css">
 </head>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Cycla</title>
     <jsp:include page="header.jsp" />
     <link rel="stylesheet" type="text/css" href="/rsc/css/main.css">
 </head>

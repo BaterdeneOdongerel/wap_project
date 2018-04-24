@@ -93,6 +93,7 @@ function changeStatus(id, status) {
             "type": "POST",
             "data": data,
         }).done(function (data) {
+            window.location.href = "/live";
             $("#error-box").show();
             $("#notification").text("Status Updated");
         }

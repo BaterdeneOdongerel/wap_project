@@ -12,7 +12,7 @@
 <html>
 <head>
 
-    <title>$Title$</title>
+    <title>Cycla</title>
     <jsp:include page="header.jsp" />
 
 </head>
@@ -48,6 +48,7 @@
                     <h5><%= event.get(i).getTitle()%>
                         <span event="notjoined" class="label label-warning <%= userEvent.get(i) != null ? "hidden" : ""%>">Not joined</span>s
                         <span event="joined" class="label label-success <%= userEvent.get(i) == null ? "hidden" : ""%>">Joined</span>
+                        <span class="label label-danger <%= !event.get(i).getHasAccident() ? "hidden" : ""%>">Raising</span>
                     </h5>
                     <p> start: <%= event.get(i).getStartDate() %> </p>
                     <p> <%= event.get(i).getBeginLocation() %> </p>
