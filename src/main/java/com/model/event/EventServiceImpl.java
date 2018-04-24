@@ -21,7 +21,7 @@ public class EventServiceImpl implements EventService {
             connection = ConnectionConfiguration.getConnection();
 
             preparedStatement = connection.prepareStatement(
-                    "INSERT into Event(title, start_date, end_date, begin_location, " +
+                    "INSERT into event(title, start_date, end_date, begin_location, " +
                             "end_location, distance, comment, status, accident_location, accident_description, hasAccident, owner) " +
                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, event.getTitle());
@@ -315,7 +315,7 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            String qry = "SELECT * FROM event WHERE status = '" + status+ "'" ;
+            String qry = "SELECT * FROM event WHERE status = '" + status+ "' order by start_date" ;
             String query2 = "SELECT * FROM userevent event WHERE user_id = '" + Services.UserService.getCurrentUser().getUserId() + "'" ;
 
                     resultSet = statement.executeQuery(qry);
