@@ -392,7 +392,7 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            String qry = "SELECT * FROM event WHERE hasAccident = 1" ;
+            String qry = "SELECT * FROM event WHERE hasAccident = 1 AND status = 'On going'" ;
 
             resultSet = statement.executeQuery(qry);
             HashMap<Integer, Event> eventMap = new HashMap<>();
