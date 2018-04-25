@@ -12,6 +12,7 @@ public enum MessagesProp {
 
     INSTANCE;
     private Properties prop;
+
     private MessagesProp() {
         prop = new Properties();
         try {
@@ -20,7 +21,6 @@ public enum MessagesProp {
             e.printStackTrace();
         }
     }
-
 
     public String getProp(String value) {
         return prop.getProperty(value);

@@ -8,11 +8,6 @@ public interface EventService {
 
     Event selectById(int id);
 
-    List<Event> selectAll();
-
-    void delete(int id);
-
-
     void update(Event event);
 
     void updateStatus(String eventStatus, Integer id);

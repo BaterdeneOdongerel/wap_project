@@ -1,16 +1,14 @@
-package com.wap;
+package com.servlet;
 
 import com.model.event.Event;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 
-import static com.utils.Utils.*;
+import static com.utils.Utils.extractValue;
 
 @WebServlet("/raise")
 public class RaiseEventServlet extends BaseServlet {
@@ -20,7 +18,6 @@ public class RaiseEventServlet extends BaseServlet {
         event.setId(Integer.parseInt(id));
         String accidentLocation = extractValue(request, "accident_location", "");
         String accidentDescription = extractValue(request, "accident_description", "");
-
         event.setAccidentLocation(accidentLocation);
         event.setAccidentDescription(accidentDescription);
         event.setHasAccident(true);

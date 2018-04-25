@@ -16,7 +16,7 @@
     </welcome-file-list>
     <servlet>
         <servlet-name>CreateEventServlet</servlet-name>
-        <servlet-class>com.wap.CreateEventServlet</servlet-class>
+        <servlet-class>com.servlet.CreateEventServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateEventServlet</servlet-name>
@@ -25,7 +25,7 @@
 
     <servlet>
         <servlet-name>EditEventServlet</servlet-name>
-        <servlet-class>com.wap.EditEventServlet</servlet-class>
+        <servlet-class>com.servlet.EditEventServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditEventServlet</servlet-name>
@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>RaiseEventServlet</servlet-name>
-        <servlet-class>com.wap.RaiseEventServlet</servlet-class>
+        <servlet-class>com.servlet.RaiseEventServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RaiseEventServlet</servlet-name>
@@ -43,7 +43,7 @@
 
     <servlet>
         <servlet-name>ChangeStatusServlet</servlet-name>
-        <servlet-class>com.wap.ChangeStatusServlet</servlet-class>
+        <servlet-class>com.servlet.ChangeStatusServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeStatusServlet</servlet-name>
@@ -52,7 +52,7 @@
 
     <servlet>
         <servlet-name>JoinAjaxServlet</servlet-name>
-        <servlet-class>com.ajax.JoinAjaxServlet</servlet-class>
+        <servlet-class>com.servlet.JoinAjaxServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>JoinAjaxServlet</servlet-name>
@@ -62,14 +62,12 @@
 
     <servlet>
         <servlet-name>LeaveAjaxServlet</servlet-name>
-        <servlet-class>com.ajax.LeaveAjaxServlet</servlet-class>
+        <servlet-class>com.servlet.LeaveAjaxServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LeaveAjaxServlet</servlet-name>
         <url-pattern>/leaveAjax</url-pattern>
     </servlet-mapping>
-
-
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>

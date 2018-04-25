@@ -1,4 +1,4 @@
-package com.wap;
+package com.servlet;
 
 import com.model.user.User;
 import com.model.user.UserServiceImpl;
@@ -7,12 +7,11 @@ import com.props.MessagesProp;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.utils.Utils.*;
+import static com.utils.Utils.extractValue;
 
 @WebServlet("/signup")
 public class SignupServlet extends BaseServlet {

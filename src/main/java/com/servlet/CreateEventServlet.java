@@ -1,4 +1,4 @@
-package com.wap;
+package com.servlet;
 
 import com.model.event.Event;
 

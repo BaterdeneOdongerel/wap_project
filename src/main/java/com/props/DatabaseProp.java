@@ -12,6 +12,7 @@ public enum DatabaseProp {
 
     INSTANCE;
     private Properties prop;
+
     private DatabaseProp() {
         prop = new Properties();
         try {
@@ -20,7 +21,6 @@ public enum DatabaseProp {
             e.printStackTrace();
         }
     }
-
 
     public String getProp(String value) {
         return prop.getProperty(value);

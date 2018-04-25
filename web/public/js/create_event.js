@@ -79,7 +79,7 @@ function raiseEvent(id, location, description) {
             "type": "POST",
             "data": data,
         }).done(function (data) {
-            window.location.reload();
+            window.location.href = "/live";
         }
     ).fail(function () {
 

@@ -2,7 +2,7 @@ package com.model.event;
 
 import com.db.ConnectionConfiguration;
 import com.utils.Utils;
-import com.wap.Services;
+import com.servlet.Services;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -31,6 +31,7 @@ public class EventServiceImpl implements EventService {
             preparedStatement.setString(5, event.getEndLocation());
             preparedStatement.setFloat(6, event.getDistance().floatValue());
             preparedStatement.setString(7, event.getComment());
+            // TODO: use enum for status
             preparedStatement.setString(8, "Upcoming");
             preparedStatement.setString(9, event.getAccidentLocation());
             preparedStatement.setString(10, event.getAccidentDescription());
@@ -88,10 +89,11 @@ public class EventServiceImpl implements EventService {
             }
 
             Statement statement = connection.createStatement();
-            String qry2 = "SELECT * FROM userevent WHERE user_id = " + userId + " AND event_id=" + event.getId();
-            ResultSet resultSet2 = statement.executeQuery(qry2);
+            String getUserEventQuery = "SELECT * FROM userevent WHERE user_id = " + userId + " AND event_id=" + event.getId();
+            ResultSet resultSet2 = statement.executeQuery(getUserEventQuery);
 
             while (resultSet2.next()) {
+                //TODO: use enum
                 if (event.getAccess() != "owner") {
                     event.setAccess("participating");
                 }
@@ -124,87 +126,6 @@ public class EventServiceImpl implements EventService {
         }
 
         return event;
-    }
-
-    @Override
-    public List<Event> selectAll() {
-        List<Event> users = new ArrayList<Event>();
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM event");
-
-            while (resultSet.next()) {
-                Event event = new Event();
-
-                // event.setPassword(resultSet.getString("password"));
-                // users.add(user);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return users;
-    }
-
-    @Override
-    public void delete(int id) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("DELETE FROM event WHERE id = ?");
-            preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
-
-            System.out.println("DELETE FROM event WHERE id = ?");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     @Override
@@ -330,26 +251,23 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-
-            String qry = "SELECT * FROM event WHERE status = '" + status+ "' order by start_date" ;
-
+            String qry = "SELECT * FROM event WHERE status = '" + status + "' order by start_date";
             resultSet = statement.executeQuery(qry);
-
             while (resultSet.next()) {
                 Event event = new Event();
                 int id = resultSet.getInt("id");
                 event.setId(id);
-                event.setTitle( resultSet.getString("title") );
-                event.setStartDate(LocalDate.parse(resultSet.getString("start_date").substring(0,10) ) );
-                event.setEndDate( LocalDate.parse(resultSet.getString("end_date").substring(0,10) ) );
-                event.setBeginLocation( resultSet.getString("begin_location") );
-                event.setEndLocation( resultSet.getString("end_location") );
-                event.setDistance( resultSet.getFloat("distance") );
-                event.setComment( resultSet.getString("comment") );
-                event.setStatus( resultSet.getString("status") );
-                event.setAccidentLocation( resultSet.getString("accident_location") );
-                event.setHasAccident( resultSet.getBoolean("hasAccident") );
-                event.setOwner( resultSet.getInt("owner") );
+                event.setTitle(resultSet.getString("title"));
+                event.setStartDate(LocalDate.parse(resultSet.getString("start_date").substring(0, 10)));
+                event.setEndDate(LocalDate.parse(resultSet.getString("end_date").substring(0, 10)));
+                event.setBeginLocation(resultSet.getString("begin_location"));
+                event.setEndLocation(resultSet.getString("end_location"));
+                event.setDistance(resultSet.getFloat("distance"));
+                event.setComment(resultSet.getString("comment"));
+                event.setStatus(resultSet.getString("status"));
+                event.setAccidentLocation(resultSet.getString("accident_location"));
+                event.setHasAccident(resultSet.getBoolean("hasAccident"));
+                event.setOwner(resultSet.getInt("owner"));
                 events.add(event);
             }
 
@@ -391,7 +309,7 @@ public class EventServiceImpl implements EventService {
         try {
             connection = ConnectionConfiguration.getConnection();
             statement = connection.createStatement();
-            String qry = "SELECT * FROM event WHERE hasAccident = 1 AND status = 'On going'" ;
+            String qry = "SELECT * FROM event WHERE hasAccident = 1 AND status = 'On going'";
 
             resultSet = statement.executeQuery(qry);
             HashMap<Integer, Event> eventMap = new HashMap<>();
@@ -400,11 +318,11 @@ public class EventServiceImpl implements EventService {
                 Event event = new Event();
                 int id = resultSet.getInt("id");
                 event.setId(id);
-                event.setTitle( resultSet.getString("title") );
-                event.setAccidentLocation( resultSet.getString("accident_location") );
-                event.setAccidentDescription( resultSet.getString("accident_description") );
-                event.setHasAccident( resultSet.getBoolean("hasAccident") );
-                event.setOwner( resultSet.getInt("owner") );
+                event.setTitle(resultSet.getString("title"));
+                event.setAccidentLocation(resultSet.getString("accident_location"));
+                event.setAccidentDescription(resultSet.getString("accident_description"));
+                event.setHasAccident(resultSet.getBoolean("hasAccident"));
+                event.setOwner(resultSet.getInt("owner"));
                 events.add(event);
                 eventMap.put(id, event);
             }

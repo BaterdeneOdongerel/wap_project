@@ -1,6 +1,4 @@
-package com.wap;
-
-import com.model.event.Event;
+package com.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

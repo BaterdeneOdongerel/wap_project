@@ -10,9 +10,7 @@ public class ConnectionConfiguration {
     public static Connection getConnection() {
         Connection connection = null;
         DatabaseProp prop = DatabaseProp.INSTANCE;
-
         try {
-
             String baseUrl = prop.getProp("MySQL.path");
             String user = prop.getProp("MySQL.user");
             String password = prop.getProp("MySQL.pass");
@@ -24,10 +22,5 @@ public class ConnectionConfiguration {
             e.printStackTrace();
         }
         return connection;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(ConnectionConfiguration.getConnection());
-
     }
 }

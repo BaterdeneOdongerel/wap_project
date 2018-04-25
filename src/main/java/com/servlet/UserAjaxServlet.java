@@ -1,8 +1,7 @@
-package com.ajax;
+package com.servlet;
 
 import com.google.gson.Gson;
 import com.model.user.User;
-import com.model.user.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +17,12 @@ import static com.utils.Utils.extractValue;
 @WebServlet("/userAjax")
 public class UserAjaxServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String username  = extractValue(request, "username", "");
-        UserServiceImpl usm = new UserServiceImpl();
-        List<User> users = usm.selectbyName(username);
+        List<User> users = Services.UserService.selectByName(username);
 
         String JSONguests;
         JSONguests = new Gson().toJson(users);
@@ -33,6 +30,5 @@ public class UserAjaxServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         out.write(JSONguests);
-
     }
 }
