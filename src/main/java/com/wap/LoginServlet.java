@@ -45,6 +45,7 @@ public class LoginServlet extends BaseServlet {
     }
 
     protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       // request.setAttribute("error","m");
         RequestDispatcher view = request.getRequestDispatcher("login.jsp");
         view.forward(request, response);
     }
