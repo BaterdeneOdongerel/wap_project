@@ -14,8 +14,64 @@
         <welcome-file>login.jsp</welcome-file>
         <welcome-file>user_list.jsp</welcome-file>
     </welcome-file-list>
+    <servlet>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <servlet-class>com.servlet.CreateEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateEventServlet</servlet-name>
+        <url-pattern>/create_event</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditEventServlet</servlet-name>
+        <servlet-class>com.servlet.EditEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditEventServlet</servlet-name>
+        <url-pattern>/edit_event</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RaiseEventServlet</servlet-name>
+        <servlet-class>com.servlet.RaiseEventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RaiseEventServlet</servlet-name>
+        <url-pattern>/raise_event</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <servlet-class>com.servlet.ChangeStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeStatusServlet</servlet-name>
+        <url-pattern>/change_status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>JoinAjaxServlet</servlet-name>
+        <servlet-class>com.servlet.JoinAjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinAjaxServlet</servlet-name>
+        <url-pattern>/joinAjax</url-pattern>
+    </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>LeaveAjaxServlet</servlet-name>
+        <servlet-class>com.servlet.LeaveAjaxServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LeaveAjaxServlet</servlet-name>
+        <url-pattern>/leaveAjax</url-pattern>
+    </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/public/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Cycla</title>
     <jsp:include page="header.jsp" />
 </head>
 <body>
@@ -69,7 +69,7 @@
 </div>
 <h2>Thumbnail</h2>
 <p>The .img-thumbnail class creates a thumbnail of the image:</p>
-<img src="/rsc/images/img1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
+<img src="./public/images/img1.jpg" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
 
 <div class="page-header">
     <h1>Example Page Header</h1>

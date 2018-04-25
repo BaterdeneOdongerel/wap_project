@@ -5,198 +5,154 @@
   Time: 10:13 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="com.model.event.Event" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 
-    <title>$Title$</title>
-    <jsp:include page="header.jsp" />
-
+    <title>Cycla - Update Event</title>
+    <jsp:include page="header.jsp"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script type="text/javascript" src="./public/js/create_event.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 </head>
 <body>
 
-<jsp:include page="nav.jsp" />
+<jsp:include page="nav.jsp"/>
 
 <div class="back_container">
     <div class="container text-center">
         <div class="body_content text-left">
-            <h3>Edit the event <span style="float: right;" class="label label-success">In process</span>
-                <span style="float: right;" class="label label-warning"></span> </h3>
-            
-            <div class="form-horizontal" action="/action_page.php">
+            <h3>Update ${value.title}</h3>
+            <div id="error-box" class="alert alert-danger alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong id="notification"></strong>
+            </div>
 
-
+            <form class="form-horizontal" id="create_form">
+                <input class="hidden" id="id" name="id" value="${event.id}">
+                <div id="errorMessage" class="error"></div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="title">Title:</label>
+                    <label class="control-label col-sm-2" for="title">Title</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="title" placeholder="Enter the trip title">
-
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <input required type="text" name="title" class="form-control" id="title"
+                               placeholder="Enter the trip title" value="${event.title}">
                     </div>
                 </div>
 
-
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="date">Start Date:</label>
+                    <label class="control-label col-sm-2" for="start_date">Start Date</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="date" name="date">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <input required type="text" id="start_date" class="form-control" id="start_date"
+                               name="start_date" value="${event.startDate}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="time">Start Time:</label>
+                    <label class="control-label col-sm-2" for="start_time">Start Time</label>
                     <div class="col-sm-3">
-                        <input type="time" class="form-control" id="time" name="time">
+                        <input required id="start_time" type="text" class="form-control" id="start_time"
+                               name="start_time">
                     </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
-                    </div>
-
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="start_location">Start Location:</label>
+                    <label class="control-label col-sm-2" for="begin_location">Start Location</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="start_location" placeholder="Enter starting location">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <input required type="text" id="begin_location" class="form-control" name="begin_location"
+                               placeholder="Enter starting location" value="${event.beginLocation}">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="end_location">End Location:</label>
+                    <label class="control-label col-sm-2" for="end_location">End Location</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" name= "end_location" id="end_location" placeholder="Enter ending location">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <input required type="text" id="end_location" class="form-control" name="end_location"
+                               id="end_location" placeholder="Enter ending location" value="${event.endLocation}">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="length_path">Length of the path:</label>
+                    <label class="control-label col-sm-2" for="distance">Distance</label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name= "length_path" id="length_path" placeholder="Enter length of the path">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <input required type="number" id="distance" class="form-control" name="distance" id="distance"
+                               placeholder="Enter length of the path" value="${event.distance}">
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="comment">Comment:</label>
+                    <label class="control-label col-sm-2" for="comment">Comment</label>
                     <div class="col-sm-7">
-                        <textarea  rows="3" class="form-control" name= "comment" id="comment" placeholder="Enter ending location">wdawdd awd wwdawdawd
-                        </textarea>
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
+                        <textarea rows="3" class="form-control" name="comment" id="comment"
+                                  placeholder="Enter ending location">${event.status}</textarea>
                     </div>
                 </div>
 
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="current_location">Current Location:</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control" name= "current_location" id="current_location" placeholder="Enter current location">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="current_length">Current length:</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name= "current_length" id="current_length" placeholder="Enter current length of the path">
-                    </div>
-                    <div class="col-xs-2">
-                        <button type="button" class="btn btn-info">
-                            <span class="glyphicon glyphicon-wrench">  </span>
-                        </button>
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-upload">  </span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button data-toggle="collapse" data-target="#demo" type="button" class="btn btn-warning btn-lg" >Raise emergency flag</button>
-
-                        <div id="demo" class="collapse mt-2" >
-                            <div class="form-group">
-                                <label class="control-label col-sm-2" for="accident_comment">Accident Info:</label>
-                                <div class="col-sm-7">
-                                    <textarea  rows="3" class="form-control" name= "accident_comment" id="accident_comment" placeholder="Enter ending location">wdawdd awd wwdawdawd
-                                    </textarea>
-                                </div>
-
-                                <div class="col-sm-10">
-                                    <button type="button" class="btn btn-danger btn-lg"> Raise Flag </button>
-                                    <button type="button" class="btn btn-success btn-lg"> Resume the trip </button>
-                                </div>
+                <c:choose>
+                    <c:when test="${event.access == 'owner' && event.status == 'Upcoming'}">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2">
+                                <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
+                                <button type="button" id="start" class="btn btn-success btn-lg">Start</button>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </c:when>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success btn-lg">Join</button>
-                        <button type="button" class="btn btn-danger btn-lg">Leave </button>
-                    </div>
-                </div>
+                    <c:when test="${(event.access == 'owner' || event.access == 'participating') && event.status == 'On going'}">
+                        <div class="form-group">
+                            <div class="col-md-offset-2">
+                                <button type="button" id="stop" class="btn btn-primary">Stop</button>
+                                <button type="button" id="raise" class="btn btn-danger">Raise</button>
+                            </div>
+                        </div>
+                    </c:when>
+                </c:choose>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success btn-lg">Start the ride</button>
+            </form>
+
+        </div>
+        <div class="modal fade" id="raise_modal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Raise Event</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="accident_form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="accident_location">Location</label>
+                                <div class="col-sm-7">
+                                    <input required type="text" name="accident_location" class="form-control"
+                                           id="accident_location" placeholder="Enter the accident location">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="comment">Description</label>
+                                <div class="col-sm-7">
+                                    <textarea rows="3" class="form-control" name="accident_description"
+                                              id="accident_description"
+                                              placeholder="Enter accident location">"</textarea>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="raise_event" class="btn btn-default" data-dismiss="modal">Raise
+                            Event
+                        </button>
                     </div>
                 </div>
 
@@ -205,8 +161,6 @@
     </div>
 </div>
 
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
-</footer>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>
