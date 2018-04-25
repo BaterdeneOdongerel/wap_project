@@ -332,7 +332,6 @@ public class EventServiceImpl implements EventService {
             statement = connection.createStatement();
 
             String qry = "SELECT * FROM event WHERE status = '" + status+ "' order by start_date" ;
-            String query2 = "SELECT * FROM userevent event WHERE user_id = '" + Services.UserService.getCurrentUser().getUserId() + "'" ;
 
             resultSet = statement.executeQuery(qry);
 

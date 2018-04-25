@@ -15,13 +15,20 @@
 <body>
 
 <jsp:include page="nav.jsp" />
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="back_container">
     <div class="container text-center">
         <div class="body_content text-left col-sm-7">
             <h3>Login</h3>
 
             <form class="form-horizontal" action="/login" method="post">
+
+                <c:if test="${error!='m'}">
+                    <div class="alert alert-warning alert-dismissible fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong> ${error}
+                    </div>
+                </c:if>
 
 
                 <div class="form-group">

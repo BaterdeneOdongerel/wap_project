@@ -45,7 +45,7 @@
 
                     <div class="column" id="<%=event.get(i).getId()%>">
                       <h5><%= event.get(i).getTitle()%>
-                        <span event="notjoined" class="label label-warning <%= userEvent.get(i) != null ? "hidden" : ""%>">Not joined</span>s
+                        <span event="notjoined" class="label label-warning <%= userEvent.get(i) != null ? "hidden" : ""%>">Not joined</span>
                         <span event="joined" class="label label-success <%= userEvent.get(i) == null ? "hidden" : ""%>">Joined</span>
                       </h5>
                       <p> start: <%= event.get(i).getStartDate() %> </p>

@@ -33,7 +33,7 @@
                     <label class="control-label col-sm-2" for="username">Username:</label>
 
                     <div class="col-sm-9">
-                        <input type="text" value="${param['username']}" class="form-control" id="username" placeholder="Enter username"/>
+                        <input type="text" value="${param['username']}" name="username" class="form-control" id="username" placeholder="Enter username"/>
                     </div>
 
                 </div>
@@ -70,7 +70,9 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="email">Email:</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="email" name="email"
+                               pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="please enter email with correct format"
+                                       placeholder="name@example.com">
                     </div>
                 </div>
 

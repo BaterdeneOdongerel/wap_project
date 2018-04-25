@@ -278,8 +278,9 @@ public class UserServiceImpl implements UserService {
         boolean ret = false;
         try {
             connection = ConnectionConfiguration.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE email = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE email = ? and password = ? ");
             preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
             User user = new User();
             user.setUserId(-1);
@@ -378,10 +379,13 @@ public class UserServiceImpl implements UserService {
         } else {
             System.out.println(MessagesProp.INSTANCE.getProp("errorLogin"));
         }
+
         List<User> us = userModel.selectbyName("ba");
         User u = userModel.selectByEmail("bati@gmail.com");
         System.out.println("====>" + u.getEmail());
-
+        User n = new User();
+        n.setUsername("iiii");
+        userModel.insert(n);
 
     }
 }

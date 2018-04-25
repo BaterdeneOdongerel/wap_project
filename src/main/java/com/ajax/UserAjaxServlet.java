@@ -26,8 +26,6 @@ public class UserAjaxServlet extends HttpServlet {
         String username  = extractValue(request, "username", "");
         UserServiceImpl usm = new UserServiceImpl();
         List<User> users = usm.selectbyName(username);
-        for (int i = 0; i < users.size(); i ++ )
-            System.out.println("=====>" + users.get(i).getUsername());
 
         String JSONguests;
         JSONguests = new Gson().toJson(users);
