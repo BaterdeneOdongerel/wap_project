@@ -10,8 +10,8 @@
 + Frontend: jsp templates.
 
 # Contributors:
-+ Bati: 
-+ Van Phan: vanthuyphan@gmail.com or https://github.com/vanthuyphan 
++ Bati: bodongerel@mum.edu
++ Van: tphan@mum.edu
 
 # Running locally:
 + Install Java 8
