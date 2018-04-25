@@ -88,7 +88,7 @@
                     <label class="control-label col-sm-2" for="comment">Comment</label>
                     <div class="col-sm-7">
                         <textarea rows="3" class="form-control" name="comment" id="comment"
-                                  placeholder="Enter ending location">${event.status}"</textarea>
+                                  placeholder="Enter ending location">${event.status}</textarea>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                 <c:choose>
                     <c:when test="${event.access == 'owner' && event.status == 'Upcoming'}">
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-2">
                                 <button type="button" id="submit" class="btn btn-success btn-lg">Update</button>
                                 <button type="button" id="start" class="btn btn-success btn-lg">Start</button>
                             </div>

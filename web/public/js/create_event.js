@@ -111,8 +111,7 @@ function postEvent() {
                 "type": "POST",
                 "data": data,
             }).done(function (data) {
-                $("#error-box").show();
-                $("#notification").text("Cool! Event Updated");
+                window.location.href = "/";
             }
         ).fail(function () {
 
@@ -123,10 +122,7 @@ function postEvent() {
                 "type": "POST",
                 "data": data,
             }).done(function (data) {
-                $("#error-box").hide();
-                $('#create_form')[0].reset();
-                $("#error-box").show();
-                $("#notification").text("Cool! Event Created");
+                window.location.href = "/";
             }
         ).fail(function () {
 
